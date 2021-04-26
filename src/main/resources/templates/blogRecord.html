@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+
+<!--sukuriam formąkuri atprintins info -->
+
+<!-- Surašome dalykus kurie surinks info-->
+
+<!--    Defaultinis yra getas. todėl ir siunčiame -->
+<!--object igalina dirbti su objektu iš db-->
+
+<form method="post" th:object="${blogRecord}">
+
+    <!--TODO  Autoriui reikia pagaloti iš karto pagal kategoriją ar pasiimima is prisijungusio userio
+      ar anonimous
+    -->
+
+    <label>Pavadinimas</label>
+    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>
+    <br>
+    <!--  Gali reikėti gali ne-reikėti username -->
+<!--    Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***-->
+
+    <label>Vartotojo vardas</label>
+    <input type="text" placeholder="Vartotojo vardas" name="vardas" th:field="*{username}"/>
+    <br>
+
+    <label>Turinys</label>
+    <br>
+    <textarea rows="20" cols="60" name="comment" th:field="*{text}">
+    </textarea>
+    <br>
+
+    <!-- Su mygtuku biški susižaistir eikia.-->
+    <button type="submit">Sukurti įrašą</button>
+    <br>
+
+</form>
+
 </body>
 </html>

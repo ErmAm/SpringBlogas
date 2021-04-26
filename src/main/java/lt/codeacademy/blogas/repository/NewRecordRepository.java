@@ -1,2 +1,4 @@
-package lt.codeacademy.blogas.repository;public interface NewRecordRepository {
+package lt.codeacademy.blogas.repository;
+
+public interface NewRecordRepository {
 }
