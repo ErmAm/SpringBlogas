@@ -2,6 +2,8 @@ Darbai
 
 1. Pasileidžiam db. MySQL iš kompo veikia.
 2. TODO Reikia susitvarkyti bent vieno blogo įrašo crudą.
+--  ok esmė tokia jog padariau find by name bet dar nebaigiau updeito ir deleto.
+--  biški reikia išsitestuoti šituos dalykus ir galvoti apie listinima bendrame lange.
 
 2.1 Realiai repo sutvarkyti reikia ir servisuose naudoti interfeisintus emtodus.
 

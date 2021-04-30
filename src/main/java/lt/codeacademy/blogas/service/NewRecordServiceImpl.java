@@ -11,8 +11,7 @@ import java.util.UUID;
 
 /**
  * Servisas stumdo info arba atlieka matematiką.
- *
- * */
+ */
 
 @Service
 public class NewRecordServiceImpl implements NewRecordService {
@@ -33,22 +32,26 @@ public class NewRecordServiceImpl implements NewRecordService {
         return newRecordRepository.getOne(id);
     }
 
-    //    //    1. crudo operacija
-//    @Override
-//    public void addRecord(BlogRecord blogRecord) {
-//
-////        blogRecord.setId(UUID.randomUUID());
-//        newRecordRepository.save(blogRecord);
-//    }
-//
-//    @Override
-//    public BlogRecord getRecord(UUID id) {
-//        return newRecordRepository.findAll();
-//    }
-//
-////    Gauname sąrašą visko ka turime savo laikinoje db.
-//    @Override
-//    public List<BlogRecord> getBlogRecords() {
-//        return newRecordRepository.getBlogRecords();
-//    }
+    @Override
+    public List<BlogRecord> getRecords() {
+
+//        TODO Pasižiūrėti kaip padaryta kitose vietose.
+        return null;
+    }
+
+    @Override
+    public void update(BlogRecord blogRecord) {
+        newRecordRepository.save(blogRecord);
+    }
+
+    @Override
+    public void delete(UUID uuid) {
+        newRecordRepository.deleteById(uuid);
+    }
+
+//    TODO biški nepagaunu šitos implimentacijos. Iš kur jis repo guana info?
+    @Override
+    public BlogRecord getByUsername(String name) {
+        return newRecordRepository.findByUsername(name).get(0);
+    }
 }

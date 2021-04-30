@@ -14,6 +14,15 @@ public interface NewRecordService {
 
     BlogRecord getRecord(UUID id);
 
+    List<BlogRecord> getRecords();
+
+    void update(BlogRecord blogRecord);
+
+    void delete(UUID uuid);
+
+//    Atsirado poreikis rasti blogą pagal pvz useri
+    BlogRecord getByUsername(String name);
+
 
 
 }
