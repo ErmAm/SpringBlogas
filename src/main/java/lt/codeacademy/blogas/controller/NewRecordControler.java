@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @Controller
 @RequestMapping("/records")
 public class NewRecordControler {
@@ -18,7 +20,7 @@ public class NewRecordControler {
         this.newRecordService = newRecordService;
     }
 
-    //    tiesiog atidarom controlerio formą
+//    sukuriam vartotojoą
     @GetMapping("/createRecord")
     public String getSigngleBlogCreationPage(Model model) {
 
@@ -26,15 +28,18 @@ public class NewRecordControler {
         return "blogRecord";
     }
 
-//    gali būti tie patys patchai nes metodai skiriasi.
+
+//   TODO Redirektas turi eiti į agrindinį blogų lisinimo meniu.
+
     @PostMapping("/createRecord")
-    public String createProduct(BlogRecord blogRecord, Model model){
+    public String createProduct(@Valid BlogRecord blogRecord, Model model){
         model.addAttribute("blogRecord", new BlogRecord());
         model.addAttribute("success", "blogRecord save successfully");
 
         newRecordService.addRecord(blogRecord);
+//        System.out.println(blogRecord);
 
-        return "blogRecord";
+        return "redirect:/records/createRecord";
     }
 
 

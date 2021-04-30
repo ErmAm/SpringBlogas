@@ -6,10 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.UUID;
 
-public interface JPANewRecordRepository extends JpaRepository<BlogRecord, UUID> {
-
-//    @Override
-//    default List<BlogRecord> findAll() {
-//        return null;
-//    }
+//Čia viskas ko riekia, implimentinti JPArepositorija kuri atneša visas CRUD operacijas
+public interface NewRecordRepository extends JpaRepository<BlogRecord, UUID> {
 }
