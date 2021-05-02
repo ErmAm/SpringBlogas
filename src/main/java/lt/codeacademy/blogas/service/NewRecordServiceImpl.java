@@ -1,12 +1,12 @@
 package lt.codeacademy.blogas.service;
 
 import lt.codeacademy.blogas.model.BlogRecord;
+import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
 import lt.codeacademy.blogas.repository.NewRecordRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,6 +16,7 @@ import java.util.UUID;
 @Service
 public class NewRecordServiceImpl implements NewRecordService {
 
+    public static final String RECORD_NOT_EXISTS = "Tokio blogo įrašo nėra";
     private final NewRecordRepository newRecordRepository;
 
     public NewRecordServiceImpl(NewRecordRepository newRecordRepository) {
@@ -29,7 +30,11 @@ public class NewRecordServiceImpl implements NewRecordService {
 
     @Override
     public BlogRecord getRecord(UUID id) {
-        return newRecordRepository.getOne(id);
+
+//   05-02     Čia yra bėdų gali grazina optionalą todėl riekia biški pakeisitmų padaryti.
+        return newRecordRepository.findById(id)
+                .orElseThrow(BlogRecordNotFoundException::new);
+
     }
 
     @Override
