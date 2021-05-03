@@ -38,10 +38,8 @@ public class NewRecordServiceImpl implements NewRecordService {
     }
 
     @Override
-    public List<BlogRecord> getRecords() {
-
-//        TODO Pasižiūrėti kaip padaryta kitose vietose.
-        return null;
+    public List<BlogRecord> getRecords() {  // 05-03 suveike
+        return newRecordRepository.findAll();
     }
 
     @Override

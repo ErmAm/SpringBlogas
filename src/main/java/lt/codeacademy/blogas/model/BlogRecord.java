@@ -8,6 +8,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -30,5 +32,8 @@ public class BlogRecord {
 
     @NotBlank
     private String text;
+
+    @OneToMany(mappedBy = "id")
+    private List<Comment> commentList;
 
 }

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div>
+  <h1>Vieno įrašo stebėjimas</h1>
+  <table border="1px">
+    <thead>
+    <tr>
+      <th>Pavadinimas</th>
+      <th>Vartotojo vardas</th>
+      <th>Turynys</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:object="${blogRecordToView}">
+      <td th:text="${blogRecordToView.name}">Pavadinimas</td>
+      <td th:text="${blogRecordToView.username}">Vartotojo vardas</td>
+      <td th:text="${blogRecordToView.text}">Pavadinimas</td>
+<!--      <td th:text="${blogRecordToView.id}">ID</td>-->
+
+    </tr>
+    </tbody>
+  </table>
 </body>
 </html>

@@ -2,15 +2,13 @@ package lt.codeacademy.blogas.controller;
 
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.service.NewRecordService;
-import org.dom4j.rule.Mode;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -63,5 +61,33 @@ public class NewRecordControler {
         return "blogRecord";
      }
 
+
+//TODO 2021 05 03  Siunčiam  listą su recordais parodymui ant ekrano.
+    @GetMapping("/all")
+    public String getRecords(Model model){
+        List<BlogRecord> blogContent = newRecordService.getRecords();
+        model.addAttribute("blogRecordList", blogContent);
+
+        return "blogMainPage";
+    }
+
+//    05-03 gauname vieną blogo įrašą
+    @GetMapping("/{id}")
+    public String getBlogRecord(@PathVariable final UUID id, Model model){
+
+        BlogRecord blogRecord = newRecordService.getRecord(id);
+        model.addAttribute("blogRecordToView", blogRecord);
+        return "viewBlogRecord";
+
+    }
+
+
+//    // Single user page
+//    @RequestMapping("/users/{userId}")
+//    public String user(@PathVariable Long userId, Model model) {
+//        User user = userService.findById(userId);
+//        model.addAttribute("user", user);
+//        return "user/details";
+//    }
 
 }

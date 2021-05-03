@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Blogo pagrindinis meniu</title>
 </head>
 <body>
-$END$
+  <div>
+    <h1>išparsinam Listą</h1>
+    <table border="1px">
+      <thead>
+        <tr>
+          <th>Pavadinimas</th>
+          <th>Vartotojo vardas</th>
+          <th>Turynys</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr th:each="blogRecord: ${blogRecordList}">
+          <td><a th:href="@{'/records/' + ${blogRecord.id}}"
+                 th:text="${blogRecord.name}">Pavadinimas</a></td>
+<!--          <td th:text="${blogRecord.name}">Pavadinimas</td>-->
+          <td th:text="${blogRecord.username}">Vartotojo vardas</td>
+          <td th:text="${blogRecord.text}">Pavadinimas</td>
+          <td th:text="${blogRecord.id}">ID</td>
+
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
 </body>
 </html>

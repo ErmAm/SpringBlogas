@@ -1,2 +1,4 @@
-package lt.codeacademy.blogas.model;public class User {
+package lt.codeacademy.blogas.model;
+
+public class User {
 }
