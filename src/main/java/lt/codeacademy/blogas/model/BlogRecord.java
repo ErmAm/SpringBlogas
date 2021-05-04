@@ -2,20 +2,25 @@ package lt.codeacademy.blogas.model;
 
 
 
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+//@Data
 @Entity
-@Table(name = "Blogrecord")
+@Table(name = "blogrecord")
 
 public class BlogRecord {
     @Id
@@ -33,7 +38,12 @@ public class BlogRecord {
     @NotBlank
     private String text;
 
-    @OneToMany(mappedBy = "id")
-    private List<Comment> commentList;
+//    @OneToMany(cascade = CascadeType.ALL,
+//            mappedBy = "blogrecord")
+////    @JoinColumn(name="comment_id")
+
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "blogRecord")
+    private List<Comment> comments = new ArrayList<>();
 
 }
