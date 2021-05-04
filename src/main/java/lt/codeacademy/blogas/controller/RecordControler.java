@@ -1,8 +1,10 @@
 package lt.codeacademy.blogas.controller;
 
 import lt.codeacademy.blogas.model.BlogRecord;
-import lt.codeacademy.blogas.service.NewRecordService;
+import lt.codeacademy.blogas.service.RecordService;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,12 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/records")
-public class NewRecordControler {
+public class RecordControler {
 
-    private final NewRecordService newRecordService;
+    private final RecordService recordService;
 
-    public NewRecordControler(NewRecordService newRecordService) {
-        this.newRecordService = newRecordService;
+    public RecordControler(RecordService newRecordService) {
+        this.recordService = newRecordService;
     }
 
 //    sukuriam vartotojoą
@@ -37,7 +39,7 @@ public class NewRecordControler {
         model.addAttribute("blogRecord", new BlogRecord());
         model.addAttribute("success", "blogRecord save successfully");
 
-        newRecordService.addRecord(blogRecord);
+        recordService.addRecord(blogRecord);
 //        System.out.println(blogRecord);
 
         return "redirect:/records/createRecord";
@@ -48,7 +50,7 @@ public class NewRecordControler {
 //    ieškom produkto pagal pavadinimą.
     @GetMapping("/findRecordByName")
     public String getRecordByName(@RequestParam String name, Model model){
-        model.addAttribute("blogRecord", newRecordService.getByUsername(name));
+        model.addAttribute("blogRecord", recordService.getByUsername(name));
      return "blogRecord";
     }
 
@@ -56,17 +58,17 @@ public class NewRecordControler {
 //    Updeitianam dar reikia posta pridėti updeitui.
      @GetMapping("/update")
     public String updateRecord(@RequestParam UUID id, Model model){
-        BlogRecord blogRecord = newRecordService.getRecord(id);
+        BlogRecord blogRecord = recordService.getRecord(id);
         model.addAttribute("blogRecord", blogRecord);
         return "blogRecord";
      }
 
 
-//TODO 2021 05 03  Siunčiam  listą su recordais parodymui ant ekrano.
+
     @GetMapping("/all")
-    public String getRecords(Model model){
-        List<BlogRecord> blogContent = newRecordService.getRecords();
-        model.addAttribute("blogRecordList", blogContent);
+    public String getRecords(Pageable pageable, Model model){
+//        List<BlogRecord> blogContent = recordService.getRecords();
+        model.addAttribute("blogRecordList", recordService.getBlogRecordsPaginated(pageable));
 
         return "blogMainPage";
     }
@@ -75,8 +77,8 @@ public class NewRecordControler {
     @GetMapping("/{id}")
     public String getBlogRecord(@PathVariable final UUID id, Model model){
 
-        BlogRecord blogRecord = newRecordService.getRecord(id);
-        model.addAttribute("blogRecordToView", blogRecord);
+        BlogRecord blogRecord = recordService.getRecord(id);
+        model.addAttribute("blogRecord", blogRecord);
         return "viewBlogRecord";
 
     }

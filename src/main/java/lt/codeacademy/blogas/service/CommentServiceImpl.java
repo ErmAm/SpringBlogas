@@ -17,6 +17,15 @@ public class CommentServiceImpl implements CommentService{
         return null;
     }
 
+    /** TODO Nereikia pamiršti suimplimentinti errora jei nebus rastas komentaras.
+     *
+     *     @Override
+     *     public Product getProduct(UUID id) {
+     *         return jpaProductRepository.findById(id)
+     *         return productRepository.findById(id)
+     *                 .orElseThrow(ProductNotFoundException::new);
+     * */
+
     @Override
     public List<Comment> getComments() {
         return null;

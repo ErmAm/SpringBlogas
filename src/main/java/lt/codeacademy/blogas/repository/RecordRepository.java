@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.UUID;
 
 //Čia viskas ko riekia, implimentinti JPArepositorija kuri atneša visas CRUD operacijas
-public interface NewRecordRepository extends JpaRepository<BlogRecord, UUID> {
+public interface RecordRepository extends JpaRepository<BlogRecord, UUID> {
         List<BlogRecord> findByUsername(String name);
 }

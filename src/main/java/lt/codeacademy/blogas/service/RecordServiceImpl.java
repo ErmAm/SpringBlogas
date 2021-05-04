@@ -2,11 +2,12 @@ package lt.codeacademy.blogas.service;
 
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
-import lt.codeacademy.blogas.repository.NewRecordRepository;
+import lt.codeacademy.blogas.repository.RecordRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -14,47 +15,54 @@ import java.util.UUID;
  */
 
 @Service
-public class NewRecordServiceImpl implements NewRecordService {
+public class RecordServiceImpl implements RecordService {
 
     public static final String RECORD_NOT_EXISTS = "Tokio blogo įrašo nėra";
-    private final NewRecordRepository newRecordRepository;
+    private final RecordRepository recordRepository;
 
-    public NewRecordServiceImpl(NewRecordRepository newRecordRepository) {
-        this.newRecordRepository = newRecordRepository;
+    public RecordServiceImpl(RecordRepository newRecordRepository) {
+        this.recordRepository = newRecordRepository;
     }
 
     @Override
     public void addRecord(BlogRecord blogRecord) {
-        newRecordRepository.save(blogRecord);
+        recordRepository.save(blogRecord);
     }
 
     @Override
     public BlogRecord getRecord(UUID id) {
 
 //   05-02     Čia yra bėdų gali grazina optionalą todėl riekia biški pakeisitmų padaryti.
-        return newRecordRepository.findById(id)
+        return recordRepository.findById(id)
                 .orElseThrow(BlogRecordNotFoundException::new);
 
     }
 
     @Override
     public List<BlogRecord> getRecords() {  // 05-03 suveike
-        return newRecordRepository.findAll();
+        return recordRepository.findAll();
     }
 
     @Override
     public void update(BlogRecord blogRecord) {
-        newRecordRepository.save(blogRecord);
+        recordRepository.save(blogRecord);
     }
 
     @Override
     public void delete(UUID uuid) {
-        newRecordRepository.deleteById(uuid);
+        recordRepository.deleteById(uuid);
     }
 
 //    TODO biški nepagaunu šitos implimentacijos. Iš kur jis repo guana info?
     @Override
     public BlogRecord getByUsername(String name) {
-        return newRecordRepository.findByUsername(name).get(0);
+        return recordRepository.findByUsername(name).get(0);
+    }
+
+
+    // 05-04 Pridedu paginationa
+    @Override
+    public Page<BlogRecord> getBlogRecordsPaginated(Pageable pageable) {
+        return recordRepository.findAll(pageable);
     }
 }
