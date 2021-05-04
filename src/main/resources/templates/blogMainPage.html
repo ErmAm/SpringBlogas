@@ -9,6 +9,10 @@
 </head>
 <body>
 <div th:if="${not blogRecordList.hasContent()}">Products list is empty</div>
+<!--TODO Čia testuoju messages-->
+<div th:text="#{blogRecords.greeting}"></div>
+
+
 <!-- Čoa geruilos -->
 <div class="container p-3 b-3"
      th:if="${blogRecordList.hasContent()}">
@@ -40,7 +44,8 @@
         <ul class="pagination">
             <li class="page-item"
                 th:classappend="${blogRecordList.number eq 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} - 1)}">Previous</a>
+                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} - 1)}"
+                   th:text="#{blogRecordList.previous}">Previous</a>
             </li>
 
             <!--Dinaminis max puslapių generavimas-->
@@ -48,11 +53,17 @@
                 th:each="pageNumber : ${#numbers.sequence(0, blogRecordList.totalPages - 1)}"
                 th:classappend="${pageNumber eq blogRecordList.number ? 'active' : ''}">
                 <a class="page-link" th:href="@{/records(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
+<!--                <a class="page-link"-->
+<!--                   th:with="order=${blogRecordList.sort.iterator().hasNext() ? blogRecordList.sort.iterator().next() : null}"-->
+<!--                   th:href="@{/records(page=${pageNumber}, sort=${order.property + ',' + order.direction})}"-->
+<!--                   th:text="${pageNumber} + 1">1</a>-->
+
             </li>
 
             <li class="page-item"
                 th:classappend="${blogRecordList.number eq blogRecordList.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} + 1)}">Next</a>
+                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} + 1)}"
+                   th:text="#{blogRecordList.next}"></a>>Next</a>
             </li>
         </ul>
 
