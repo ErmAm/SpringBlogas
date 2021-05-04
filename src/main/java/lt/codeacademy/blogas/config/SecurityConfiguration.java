@@ -1,4 +1,4 @@
-package lt.codeacademy.blogas.controller;
+package lt.codeacademy.blogas.config;
 
 
 import org.springframework.context.annotation.Configuration;

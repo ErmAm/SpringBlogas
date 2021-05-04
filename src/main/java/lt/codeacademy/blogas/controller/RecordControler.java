@@ -78,7 +78,7 @@ public class RecordControler {
     public String getBlogRecord(@PathVariable final UUID id, Model model){
 
         BlogRecord blogRecord = recordService.getRecord(id);
-        model.addAttribute("blogRecord", blogRecord);
+        model.addAttribute("blogRecordToView", blogRecord);
         return "viewBlogRecord";
 
     }

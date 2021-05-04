@@ -10,10 +10,10 @@
 <body>
 <div th:if="${not blogRecordList.hasContent()}">Products list is empty</div>
 <!-- Čoa geruilos -->
-<div class="container">
-     th:if="${blogRecordList.hasContent()}"
+<div class="container p-3 b-3"
+     th:if="${blogRecordList.hasContent()}">
 
-    <h1>išparsinam Listą</h1>
+    <h1>Išparsinam Listą</h1>
     <table border="1px">
         <thead>
         <tr>
@@ -38,12 +38,25 @@
 
     <div>
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item"
+                th:classappend="${blogRecordList.number eq 0 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} - 1)}">Previous</a>
+            </li>
+
+            <!--Dinaminis max puslapių generavimas-->
+            <li class="page-item"
+                th:each="pageNumber : ${#numbers.sequence(0, blogRecordList.totalPages - 1)}"
+                th:classappend="${pageNumber eq blogRecordList.number ? 'active' : ''}">
+                <a class="page-link" th:href="@{/records(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
+            </li>
+
+            <li class="page-item"
+                th:classappend="${blogRecordList.number eq blogRecordList.totalPages - 1 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} + 1)}">Next</a>
+            </li>
         </ul>
+
+        <span th:text="'Total: ' + ${blogRecordList.totalElements}">Total: 100</span>
     </div>
 
 </div>
