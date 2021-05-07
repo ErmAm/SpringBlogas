@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <form class="form-horizontal" action='' method="POST" th:object="${newUser}">
+
+    <fieldset>
+      <div id="legend">
+        <legend class="" th:text="#{createUser.title}">Register</legend>
+      </div>
+
+<!--      username-->
+      <div class="control-group">
+        <!-- Username -->
+        <label class="control-label"  for="username"
+               th:text="#{createUser.label.username}">Username</label>
+        <div class="controls">
+          <input type="text" id="username" name="username" placeholder="" class="input-xlarge"
+          th:field="*{username}">
+        </div>
+      </div>
+<!--real name-->
+      <div class="control-group">
+        <!-- name -->
+        <label class="control-label"  for="name"
+               th:text="#{createUser.label.name}">name</label>
+        <div class="controls">
+          <input type="text" id="name" name="name" placeholder="" class="input-xlarge"
+                 th:field="*{name}">
+        </div>
+      </div>
+      <!--real surname-->
+      <div class="control-group">
+        <!-- surname -->
+        <label class="control-label"  for="surname"
+               th:text="#{createUser.label.surname}">surname</label>
+        <div class="controls">
+          <input type="text" id="surname" name="surname" placeholder="" class="input-xlarge"
+                 th:field="*{surname}">
+        </div>
+      </div>
+
+      <!-- end Mano fieldai-->
+      <div class="control-group">
+        <!-- E-mail -->
+        <label class="control-label" for="email" th:text="#{createUser.label.email}">E-mail</label>
+        <div class="controls">
+          <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <!-- Password-->
+        <label class="control-label" for="password" th:text="#{createUser.label.password}">Password</label>
+        <div class="controls">
+          <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+          <p class="help-block" th:text="#{createUser.helpinfo.password}">Password should be at least 4 characters</p>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <!-- Password -->
+        <label class="control-label"  for="password_confirm"
+               th:text="#{createUser.label.password.confirm}">Password (Confirm)</label>
+        <div class="controls">
+          <input type="password" id="password_confirm" name="password_confirm" placeholder="" class="input-xlarge">
+          <p class="help-block" th:text="#{createUser.helpinfo.password.confirm}">Please confirm password</p>
+        </div>
+      </div>
+
+
+      <!--Padaru truputi chaltūra mat visi nauji useriai bus tik paprasti jokių adminų nekurisų.-->
+
+
+      <div class="control-group">
+        <!-- Button -->
+        <div class="controls">
+          <button class="btn btn-success"  th:text="#{createUser.button.register}">Register</button>
+        </div>
+      </div>
+
+
+
+    </fieldset>
+  </form>
+</div>
+
+
+
+</body>
+</html>

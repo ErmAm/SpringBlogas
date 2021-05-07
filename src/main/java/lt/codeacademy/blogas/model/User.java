@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -30,6 +31,9 @@ public class User {
     private String username;
 
     @NotBlank
+    private String password;
+
+    @NotBlank
     private String name;
 
     @NotBlank
@@ -40,8 +44,9 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @NotBlank
-    private LocalDateTime dateCreated;
+    // 05-07 TODO šitas  kels bėdų ir vėliau. Time objektas nešneka su hiberneitu
+//    @NotBlank
+//    private Timestamp dateCreated;
 
 
 //    TODO sąryšiai kiek suprantu vienas vartotojas gali turėti daug įrašų ir gali atlikti komentarus

@@ -27,3 +27,8 @@ INSERT INTO Blogrecord(id, name, username, text) VALUES
 -- ('7a580a64-a414-40dc-8d61-525a79ffd225','Laplandijos pasvaiste', 'Zuzana', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52a979ff2225','Nieko nezinau', 'Paranas', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52a179ff2225','Viso gero geri geria', 'Gvadelupė', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert');
+
+INSERT INTO role(id, role_name) VALUES
+('7a580a64-1234-40dc-8d61-52ad7aff2125','ADMIN'),
+('7a580a64-1235-40dc-8d61-52ad7aff2115','USER'),
+('7a580a64-1236-40dc-8d61-52ad7aff2125','PUBLIC');

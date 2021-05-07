@@ -19,12 +19,13 @@ import java.util.UUID;
 public class Role {
 
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     private UUID id;
 
     @NotBlank
+    @Column(name = "role_name")
     private String roleName;
 
     @OneToMany(mappedBy = "role")
