@@ -78,8 +78,13 @@
         </div>
       </div>
 
-
-      <!--Padaru truputi chaltūra mat visi nauji useriai bus tik paprasti jokių adminų nekurisų.-->
+<!--      dedu optionalą -->
+<!--      <select class="form-select" aria-label="Role selection" th:field="*{role}">-->
+<!--        <option selected>Select role</option>-->
+<!--        <option th:value="'7a580a64-1235-40dc-8d61-52ad7aff2115'" th:text="#{createUser.role.selection1}">User</option>-->
+<!--        <option th:value="'7a580a64-1234-40dc-8d61-52ad7aff2125'" th:text="#{createUser.role.selection2}">Admin</option>-->
+<!--      </select>-->
+<!--      <input type="hidden" th:value="${newUser.role}" th:attr="role='7a580a64-1235-40dc-8d61-52ad7aff2115'"/>-->
 
 
       <div class="control-group">
@@ -88,8 +93,6 @@
           <button class="btn btn-success"  th:text="#{createUser.button.register}">Register</button>
         </div>
       </div>
-
-
 
     </fieldset>
   </form>
