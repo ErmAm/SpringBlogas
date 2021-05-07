@@ -29,13 +29,12 @@ public class Comment {
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
+    @NotBlank
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user; // reikia surišti komentaro rašytoją.
-
-    @NotBlank
-    private String content;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="blog_id")

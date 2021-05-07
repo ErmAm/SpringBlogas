@@ -47,9 +47,16 @@ public class BlogRecord {
     @NotBlank
     private String text;
 
+
+//    Susikuriam foreign key į userį
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
 //    @OneToMany(cascade = CascadeType.ALL,
 //            mappedBy = "blogrecord")
 ////    @JoinColumn(name="comment_id")
+
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "blogRecord")
