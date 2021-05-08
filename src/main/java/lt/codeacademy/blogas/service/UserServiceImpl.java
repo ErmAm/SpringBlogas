@@ -25,12 +25,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public BlogRecord getUser(UUID id) {
+    public User getUser(UUID id) {
         return null;
     }
 
     @Override
-    public List<BlogRecord> getUsers() {
+    public User getUserByName(String username) {
+        return userRepository.findUserByName(username);
+    }
+
+    @Override
+    public List<User> getUsers() {
         return null;
     }
 

@@ -12,9 +12,11 @@ public interface UserService {
 
     void addUser(User user);
 
-    BlogRecord getUser(UUID id);
+    User getUser(UUID id);
 
-    List<BlogRecord> getUsers();
+    User getUserByName(String username);
+
+    List<User> getUsers();
 
     void update(User user);
 

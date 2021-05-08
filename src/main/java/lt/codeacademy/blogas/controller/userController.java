@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -42,6 +43,14 @@ public class userController {
 
 
     // 2. randame susikurtą userį pagal vardą.
+
+    @GetMapping("/findUser")
+    public String findUserByName(@RequestParam String userName, Model model){
+        model.addAttribute("userToFind", userService.getUserByName(userName));
+//        System.out.println("raday userį: " + model.getAttribute("userToFind"));
+        return "existingUser";
+    }
+
 
     // 3. leidžiame updeitinti userį.
 

@@ -1,20 +1,36 @@
-INSERT INTO Blogrecord(id, name, username, text) VALUES
-('7a580a64-a414-31dc-8d61-52aad9ff2225','Kai niežti rankos', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22ff','Irasas 2', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f1','Irasas 3', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f2','Irasas 4', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f3','Irasas 5', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f4','Irasas 7', 'Žemaitėlė', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f5','Irasas 8', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f6','Irasas 9', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f7','Irasas 10', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22f8','Irasas 11', 'Žemaitėlė', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff22fa','Irasas 12', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff291f','Irasas 13', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff282f','Irasas 14', 'Žemaitėlė', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff243f','Irasas 15', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-31dc-8d61-52aad9ff254f','Irasas 16', 'Solomon', 'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-('7a580a64-a414-40dc-8d61-52ad7aff2125','Nūdienos aktualijos', 'Žemaitėlė', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert');
+INSERT INTO Blogrecord(id, name, username, text)
+VALUES ('7a580a64-a414-31dc-8d61-52aad9ff2225', 'Kai niežti rankos', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22ff', 'Irasas 2', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f1', 'Irasas 3', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f2', 'Irasas 4', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f3', 'Irasas 5', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f4', 'Irasas 7', 'Žemaitėlė',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f5', 'Irasas 8', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f6', 'Irasas 9', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f7', 'Irasas 10', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f8', 'Irasas 11', 'Žemaitėlė',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff22fa', 'Irasas 12', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff291f', 'Irasas 13', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff282f', 'Irasas 14', 'Žemaitėlė',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff243f', 'Irasas 15', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-31dc-8d61-52aad9ff254f', 'Irasas 16', 'Solomon',
+        'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
+       ('7a580a64-a414-40dc-8d61-52ad7aff2125', 'Nūdienos aktualijos', 'Žemaitėlė',
+        'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert');
 -- ('7a580a64-a414-40dc-8d61-52aad9ff2225','Irasas 2', 'Žemaitėlė', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52aa7dff2225','Irasas 3', 'Arkliaganis', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52aff9ff2225','Irasas 4', 'Vergė Izaura', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
@@ -28,7 +44,12 @@ INSERT INTO Blogrecord(id, name, username, text) VALUES
 -- ('7a580a64-a414-40dc-8d61-52a979ff2225','Nieko nezinau', 'Paranas', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52a179ff2225','Viso gero geri geria', 'Gvadelupė', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert');
 
-INSERT INTO role(id, role_name) VALUES
-('7a580a64-1234-40dc-8d61-52ad7aff2125','ADMIN'),
-('7a580a64-1235-40dc-8d61-52ad7aff2115','USER'),
-('7a580a64-1236-40dc-8d61-52ad7aff2125','PUBLIC');
+INSERT INTO role(id, role_name)
+VALUES ('00000000-0000-0000-000f-00000000000a', 'ADMIN'),
+       ('00000000-0000-0000-000f-000000000001', 'USER'),
+       ('00000000-0000-0000-000f-0000000000ff', 'PUBLIC');
+
+
+
+INSERT INTO user(id, name, password, surname, username, role_id)
+VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','user1','00000000-0000-0000-000f-000000000001');
