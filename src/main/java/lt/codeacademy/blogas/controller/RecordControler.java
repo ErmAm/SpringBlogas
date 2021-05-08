@@ -63,6 +63,12 @@ public class RecordControler {
         return "blogRecord";
      }
 
+    @PostMapping("/update")
+    public String updateRecord(BlogRecord blogRecord, Model model){
+        recordService.update(blogRecord);
+        return "redirect:/records/all";
+    }
+
 
 
     @GetMapping("/all")

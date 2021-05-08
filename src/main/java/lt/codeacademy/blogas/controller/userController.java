@@ -1,10 +1,8 @@
 package lt.codeacademy.blogas.controller;
 
 
-import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.service.UserService;
-import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,6 +53,7 @@ public class userController {
 
 
     // 3. leidžiame updeitinti userį.
+//    neveikia reikės išspręsti iki pirmadienio.
     @GetMapping("/update")
     public String findUserByIdToUpdate(@RequestParam UUID id, Model model){
         User userToUpdate = userService.getUser(id);
@@ -62,13 +61,19 @@ public class userController {
         return "existingUser";
     }
 
-    @PutMapping("/update/{id}")
-    public String updateUser(User user, Model model){
-        userService.update(user);
-//        model.addAttribute("userToWorkWith", use)
-        return "existingUser";
-    }
+//    @PutMapping("/update/{id}")
+//    public String updateUser(User user, Model model){
+//        userService.update(user);
+////        model.addAttribute("userToWorkWith", use)
+//        return "existingUser";
+//    }
 
 
     // 4.deletiname userį.
+    @GetMapping("/delete")
+    public String deketeUser(@RequestParam UUID id, Model model){
+        userService.delete(id);
+        return "redirect:/registration/createUser";
+    }
+
 }

@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 </head>
 <body>
 
@@ -14,7 +12,15 @@
 <!--    Defaultinis yra getas. todėl ir siunčiame -->
 <!--object igalina dirbti su objektu iš db-->
 
-<form method="post" th:object="${blogRecord}">
+<!--Actionas naudojamas nurodyti iki kokio mappingo reikia nueiti-->
+<!--th:action="@{/records/createRecord}"-->
+
+<div class="container">
+
+<div class="col-4">
+
+
+<form method="post" th:object="${blogRecord}" >
 
     <!--TODO  Autoriui reikia pagaloti iš karto pagal kategoriją ar pasiimima is prisijungusio userio
       ar anonimous
@@ -41,6 +47,8 @@
     <br>
 
 </form>
+</div>
+</div>
 
 </body>
 </html>

@@ -1,30 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="fragments/reusable :: header(#{existingUser.header.title})">-->
+<!--</head>-->
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
+
 <body>
-<div>
-  <h1>Vieno įrašo stebėjimas</h1>
-  <table border="1px">
-    <thead>
-    <tr>
-      <th>Pavadinimas</th>
-      <th>Vartotojo vardas</th>
-      <th>Turynys</th>
-    </tr>
-    </thead>
+<div class="container">
+    <div class="row">
+        <div class="col border">
 
-    <tbody>
-    <tr th:object="${blogRecordToView}">
-      <td th:text="${blogRecordToView.name}">Pavadinimas</td>
-      <td th:text="${blogRecordToView.username}">Vartotojo vardas</td>
-      <td th:text="${blogRecordToView.text}">Pavadinimas</td>
-<!--      <td th:text="${blogRecordToView.id}">ID</td>-->
+            <h1 class="p-2 d-flex justify-content-center"></h1>
+            <!--  piešiu su bootstrapu-->
+            <div class="p-2" th:object="${blogRecordToView}">
 
-    </tr>
-    </tbody>
-  </table>
+                <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
+                     th:text="#{view.Blog.record.title}">Record name></div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.name}">Pavadinimas></div>
+                <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
+                     th:text="#{view.Blog.record.author}">Record name></div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.username}">Vartotojo vardas</div>
+                <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
+                     th:text="#{view.Blog.record.content}">Record name></div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.text}">Pavadinimas</div>
+            </div>
+
+
+<!--            <div class="row">-->
+<!--                <div class="p-2 d-flex justify-content-center">-->
+<!--                    <h1>Record Name</h1>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--              -->
+<!--            </div>-->
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--        <table border="1px">-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Pavadinimas</th>-->
+<!--                <th>Vartotojo vardas</th>-->
+<!--                <th>Turynys</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+
+<!--            <tbody>-->
+<!--            <tr th:object="${blogRecordToView}">-->
+<!--                <td th:text="${blogRecordToView.name}">Pavadinimas</td>-->
+<!--                <td th:text="${blogRecordToView.username}">Vartotojo vardas</td>-->
+<!--                <td th:text="${blogRecordToView.text}">Pavadinimas</td>-->
+
+<!--                &lt;!&ndash;      <td th:text="${blogRecordToView.id}">ID</td>&ndash;&gt;-->
+
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 </body>
 </html>

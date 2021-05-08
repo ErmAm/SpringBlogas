@@ -1,0 +1,9 @@
+.error {
+    border-color: red;
+    color: red;
+}
+
+.error-block {
+    background-color: lightpink;
+    display: inline-block;
+}
