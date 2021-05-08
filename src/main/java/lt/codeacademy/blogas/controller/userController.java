@@ -4,14 +4,13 @@ package lt.codeacademy.blogas.controller;
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.service.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/registration")
@@ -42,17 +41,34 @@ public class userController {
     }
 
 
-    // 2. randame susikurtą userį pagal vardą.
+    // 2. randame susikurtą userį pagal vardą
+//
 
-    @GetMapping("/findUser")
-    public String findUserByName(@RequestParam String userName, Model model){
-        model.addAttribute("userToFind", userService.getUserByName(userName));
+    @GetMapping("/findByName")
+    public String findUserByName(@RequestParam String username, Model model){
+        model.addAttribute("userToWorkWith", userService.getUserByName(username));
 //        System.out.println("raday userį: " + model.getAttribute("userToFind"));
         return "existingUser";
     }
 
+//    TODO neapsisprendžiu ar reikia geto pagal id.
+
 
     // 3. leidžiame updeitinti userį.
+    @GetMapping("/update")
+    public String findUserByIdToUpdate(@RequestParam UUID id, Model model){
+        User userToUpdate = userService.getUser(id);
+        model.addAttribute("userToWorkWith", userToUpdate);
+        return "existingUser";
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateUser(User user, Model model){
+        userService.update(user);
+//        model.addAttribute("userToWorkWith", use)
+        return "existingUser";
+    }
+
 
     // 4.deletiname userį.
 }

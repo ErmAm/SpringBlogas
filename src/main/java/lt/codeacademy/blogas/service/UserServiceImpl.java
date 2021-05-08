@@ -3,6 +3,7 @@ package lt.codeacademy.blogas.service;
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.repository.UserRepository;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +27,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(UUID id) {
-        return null;
+        return userRepository.findById(id)
+                .orElseThrow(()->new UsernameNotFoundException(id.toString()));
     }
 
     @Override
@@ -41,7 +43,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(User user) {
-
+       userRepository.save(user);
     }
 
     @Override

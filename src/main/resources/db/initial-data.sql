@@ -51,5 +51,6 @@ VALUES ('00000000-0000-0000-000f-00000000000a', 'ADMIN'),
 
 
 
-INSERT INTO user(id, name, password, surname, username, role_id)
-VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','user1','00000000-0000-0000-000f-000000000001');
+INSERT INTO user(id, name, password, surname,email, username, role_id)
+VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','plepys@webas.lt','user1','00000000-0000-0000-000f-000000000001'),
+       ('7a580a64-1234-0002-8d61-52ad7aff2125', 'zbignevas', 'aaaa','subacius','nesakysiu@zebra.lt','user2','00000000-0000-0000-000f-000000000001');

@@ -39,6 +39,9 @@ public class User {
     @NotBlank
     private String surname;
 
+    @NotBlank
+    private String email;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
