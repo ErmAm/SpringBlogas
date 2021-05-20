@@ -1,16 +1,16 @@
 package lt.codeacademy.blogas.controller;
 
 import lt.codeacademy.blogas.model.BlogRecord;
+import lt.codeacademy.blogas.model.Comment;
+import lt.codeacademy.blogas.service.CommentService;
 import lt.codeacademy.blogas.service.RecordService;
 
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -18,9 +18,11 @@ import java.util.UUID;
 public class RecordControler {
 
     private final RecordService recordService;
+    private final CommentService commentService;
 
-    public RecordControler(RecordService newRecordService) {
+    public RecordControler(RecordService newRecordService, CommentService commentService) {
         this.recordService = newRecordService;
+        this.commentService = commentService;
     }
 
 //    sukuriam vartotojoą
@@ -88,6 +90,22 @@ public class RecordControler {
         return "viewBlogRecord";
 
     }
+
+
+    /**
+     *
+     *  Komentarų dalis. Nežinau tik dar kaip viską implimentinsiu.
+     *
+     * */
+
+//    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
+
+    @GetMapping("/addComment")
+    public String addComment(@PathVariable UUID id, Model model){
+        model.addAttribute("newComment", new Comment());
+        return "addComment";
+    }
+
 
 
 //    // Single user page

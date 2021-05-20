@@ -54,3 +54,13 @@ VALUES ('00000000-0000-0000-000f-00000000000a', 'ADMIN'),
 INSERT INTO user(id, name, password, surname,email, username, role_id)
 VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','plepys@webas.lt','user1','00000000-0000-0000-000f-000000000001'),
        ('7a580a64-1234-0002-8d61-52ad7aff2125', 'zbignevas', 'aaaa','subacius','nesakysiu@zebra.lt','user2','00000000-0000-0000-000f-000000000001');
+
+
+-- INSERT INTO comment(id, content, blog_id, user_id)
+-- VALUES ('00000000-000c-000a-000f-00000000000a', 'Piktas komentaras','7a580a64-a414-31dc-8d61-52aad9ff22ff','00000000-0000-0000-000f-00000000000a');
+
+-- VALUES ('00000000-000c-000a-000f-00000000000a', 'Piktas komentaras','7a580a64-a414-31dc-8d61-52aad9ff22ff','00000000-0000-0000-000f-00000000000a');
+--
+--
+--        ('00000000-0000-000a-000f-000000000001', 'USER'),
+--        ('00000000-0000-000a-000f-0000000000ff', 'PUBLIC');

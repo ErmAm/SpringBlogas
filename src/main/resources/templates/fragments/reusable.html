@@ -16,4 +16,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 
+<nav th:fragment="navigationBar">
+  <h1>Navbaras</h1>
+  <ul class="nav navbar-light bg-light">
+    <li class="nav-item"><a class="nav-link" href="/records/all">All Records</a></li>
+    <li class="nav-item"><a class="nav-link" href="/records/createRecord">Create New Record</a></li>
+  </ul>
+
+</nav>
+
+
 </html>

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="fragments/reusable::header(title)">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+
+<nav th:replace="fragments/reusable :: navigationBar"></nav>
 
 <!--Tiesiog intro puslapis-->
 <h1>Sveiki atvyke į mano blogą. Galime pradėti darbą</h1>

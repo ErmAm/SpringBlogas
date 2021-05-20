@@ -9,6 +9,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -26,8 +27,10 @@ public class Comment {
     @Type(type = "uuid-char")
     private UUID id;
 
-    @CreationTimestamp
-    private LocalDateTime createDateTime;
+//    @CreationTimestamp
+//    @Column(name="created")
+//    @Type(type="timestamp")
+//    private Timestamp createDateTime;
 
     @NotBlank
     private String content;
