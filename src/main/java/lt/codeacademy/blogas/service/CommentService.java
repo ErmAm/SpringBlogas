@@ -11,7 +11,7 @@ public interface CommentService {
 
     Comment getComment(UUID id);
 
-    List<Comment> getComments();
+    List<Comment> getAllComments();
 
     void update(Comment comment);
 

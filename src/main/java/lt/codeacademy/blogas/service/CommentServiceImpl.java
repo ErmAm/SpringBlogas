@@ -37,8 +37,8 @@ public class CommentServiceImpl implements CommentService{
      * */
 
     @Override
-    public List<Comment> getComments() {
-        return null;
+    public List<Comment> getAllComments() {
+        return commentRepository.findAll();
     }
 
     @Override
@@ -50,4 +50,11 @@ public class CommentServiceImpl implements CommentService{
     public void delete(UUID id) {
 
     }
+
+
+//    1. sortiname pagal vartotojo id kommentarus, filtruojam.
+
+
+//    1.1 Pasižiūrima r visi komentarai yra.
+
 }

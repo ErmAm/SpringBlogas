@@ -10,6 +10,6 @@ public class MainPageController {
     @GetMapping("/")
     public String index(){
 
-        return "index";
+        return "redirect:/records/all";
     }
 }

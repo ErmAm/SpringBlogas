@@ -44,7 +44,9 @@ public class RecordControler {
         recordService.addRecord(blogRecord);
 //        System.out.println(blogRecord);
 
-        return "redirect:/records/createRecord";
+//        TODO po posto nukreipiam į main puslapį.
+//        aba paliekam stebėti savus blogo įrašus. .
+        return "redirect:/records/all";
     }
 
 //    *** 04-30
@@ -85,6 +87,10 @@ public class RecordControler {
     @GetMapping("/{id}")
     public String getBlogRecord(@PathVariable final UUID id, Model model){
 
+//      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
+//        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
+
+
         BlogRecord blogRecord = recordService.getRecord(id);
         model.addAttribute("blogRecordToView", blogRecord);
         return "viewBlogRecord";
@@ -100,12 +106,33 @@ public class RecordControler {
 
 //    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
 
-    @GetMapping("/addComment")
-    public String addComment(@PathVariable UUID id, Model model){
+    @GetMapping("/comment/addComment")
+    public String createNewCommentView(@RequestParam(required=false) UUID userId, Model model){
         model.addAttribute("newComment", new Comment());
-        return "addComment";
+//      TODO  reikia pridėti userio id.
+//        model.addAttribute();
+
+        return "comment";
     }
 
+    @PostMapping("/comment/addComment")
+    public String addComment(@Valid Comment comment, Model model){
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("success", "comment was created successfully");
+        commentService.addComment(comment);
+        return "redirect:/records/all";
+    }
+
+
+//    2. Gaunam visus commentarus.
+
+//    @PostMapping("/createRecord")
+//    public String createProduct(@Valid BlogRecord blogRecord, Model model){
+//        model.addAttribute("blogRecord", new BlogRecord());
+//        model.addAttribute("success", "blogRecord save successfully");
+//        recordService.addRecord(blogRecord);
+//        return "redirect:/records/all";
+//    }
 
 
 //    // Single user page
