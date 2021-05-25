@@ -41,14 +41,14 @@
                 <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.text}">Pavadinimas</div>
             </div>
 
-<!--            <div class="row">-->
-<!--                <div class="p-2 d-flex justify-content-center">-->
-<!--                    <h1>Record Name</h1>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="row">-->
-<!--              -->
-<!--            </div>-->
+
+            <h3>Comments</h3>
+<!--            associatedComments-->
+
+            <div th:each="comment: ${associatedComments}">
+                <div th:text="${comment.user}">Username</div>
+                <div th:text="${comment.content}">Content</div>
+            </div>
         </div>
     </div>
 

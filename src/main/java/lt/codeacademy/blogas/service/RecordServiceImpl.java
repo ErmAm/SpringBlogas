@@ -38,6 +38,9 @@ public class RecordServiceImpl implements RecordService {
 
     }
 
+
+
+
     @Override
     public List<BlogRecord> getRecords() {  // 05-03 suveike
         return recordRepository.findAll();

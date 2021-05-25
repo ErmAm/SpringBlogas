@@ -16,7 +16,8 @@
 <form method="post" th:object="${newComment}" >
     <label>Pavadinimas</label>
 <!--    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
-    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}">
+    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+    <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
     <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
 </form>

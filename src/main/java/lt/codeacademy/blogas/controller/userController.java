@@ -56,7 +56,7 @@ public class userController {
 //    neveikia reikės išspręsti iki pirmadienio.
     @GetMapping("/update")
     public String findUserByIdToUpdate(@RequestParam UUID id, Model model){
-        User userToUpdate = userService.getUser(id);
+        User userToUpdate = userService.getUserById(id);
         model.addAttribute("userToWorkWith", userToUpdate);
         return "existingUser";
     }

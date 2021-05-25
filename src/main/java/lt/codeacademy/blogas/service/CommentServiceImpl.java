@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService{
@@ -51,10 +52,30 @@ public class CommentServiceImpl implements CommentService{
 
     }
 
+// 05-25 Filtruojam pagal paduota blogo id iš visų kommentarų ir grąžinam pageidaujamą įrašą.
 
-//    1. sortiname pagal vartotojo id kommentarus, filtruojam.
+    public List<Comment> filteredByBlogComments(UUID id){
+
+//        Kažką riekia sugalvoti su erroru jei turime tuščia listą.
+        if (!getAllComments().isEmpty()){
+            List<Comment> filteredByBlogCommentList = getAllComments()
+                    .stream()
+                    .filter(com -> com.getBlogRecord().getId().equals(id))
+                    .collect(Collectors.toList());
+            return filteredByBlogCommentList;
+        }else {
+            return null;
+        }
+
+    }
 
 
-//    1.1 Pasižiūrima r visi komentarai yra.
+//  List<Customer> charlesWithMoreThan100Points = customers
+//  .stream()
+//  .filter(c -> c.getPoints() > 100 && c.getName().startsWith("Charles"))
+//  .collect(Collectors.toList());
+//
+//  assertThat(charlesWithMoreThan100Points).hasSize(1);
+//  assertThat(charlesWithMoreThan100Points).contains(charles);
 
 }

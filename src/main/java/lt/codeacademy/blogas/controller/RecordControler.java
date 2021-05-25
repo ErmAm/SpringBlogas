@@ -5,12 +5,14 @@ import lt.codeacademy.blogas.model.Comment;
 import lt.codeacademy.blogas.service.CommentService;
 import lt.codeacademy.blogas.service.RecordService;
 
+import lt.codeacademy.blogas.service.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -19,13 +21,15 @@ public class RecordControler {
 
     private final RecordService recordService;
     private final CommentService commentService;
+    private final UserService userService;
 
-    public RecordControler(RecordService newRecordService, CommentService commentService) {
+    public RecordControler(RecordService newRecordService, CommentService commentService, UserService userService) {
         this.recordService = newRecordService;
         this.commentService = commentService;
+        this.userService = userService;
     }
 
-//    sukuriam vartotojoą
+    //    sukuriam vartotojoą
     @GetMapping("/createRecord")
     public String getSigngleBlogCreationPage(Model model) {
 
@@ -37,7 +41,7 @@ public class RecordControler {
 //   TODO Redirektas turi eiti į agrindinį blogų lisinimo meniu.
 
     @PostMapping("/createRecord")
-    public String createProduct(@Valid BlogRecord blogRecord, Model model){
+    public String createProduct(@Valid BlogRecord blogRecord, Model model) {
         model.addAttribute("blogRecord", new BlogRecord());
         model.addAttribute("success", "blogRecord save successfully");
 
@@ -51,72 +55,89 @@ public class RecordControler {
 
 //    *** 04-30
 
-//    ieškom produkto pagal pavadinimą.
+    //    ieškom produkto pagal pavadinimą.
     @GetMapping("/findRecordByName")
-    public String getRecordByName(@RequestParam String name, Model model){
+    public String getRecordByName(@RequestParam String name, Model model) {
         model.addAttribute("blogRecord", recordService.getByUsername(name));
-     return "blogRecord";
+        return "blogRecord";
     }
 
 
-//    Updeitianam dar reikia posta pridėti updeitui.
-     @GetMapping("/update")
-    public String updateRecord(@RequestParam UUID id, Model model){
+    //    Updeitianam dar reikia posta pridėti updeitui.
+    @GetMapping("/update")
+    public String updateRecord(@RequestParam UUID id, Model model) {
         BlogRecord blogRecord = recordService.getRecord(id);
         model.addAttribute("blogRecord", blogRecord);
         return "blogRecord";
-     }
+    }
 
     @PostMapping("/update")
-    public String updateRecord(BlogRecord blogRecord, Model model){
+    public String updateRecord(BlogRecord blogRecord, Model model) {
         recordService.update(blogRecord);
         return "redirect:/records/all";
     }
 
 
-
     @GetMapping("/all")
-    public String getRecords(Pageable pageable, Model model){
+    public String getRecords(Pageable pageable, Model model) {
 //        List<BlogRecord> blogContent = recordService.getRecords();
         model.addAttribute("blogRecordList", recordService.getBlogRecordsPaginated(pageable));
 
         return "blogMainPage";
     }
 
-//    05-03 gauname vieną blogo įrašą
+    //    05-03 gauname vieną blogo įrašą
     @GetMapping("/{id}")
-    public String getBlogRecord(@PathVariable final UUID id, Model model){
+    public String getBlogRecord(@PathVariable final UUID id, Model model) {
 
 //      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
 //        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
 
-
         BlogRecord blogRecord = recordService.getRecord(id);
-        model.addAttribute("blogRecordToView", blogRecord);
-        return "viewBlogRecord";
+        if (!blogRecord.equals(null)){
 
+            model.addAttribute("associatedComments", commentService.filteredByBlogComments(id));
+            model.addAttribute("blogRecordToView", blogRecord);
+            return "viewBlogRecord";
+        } else {
+            return "404";
+        }
     }
 
 
     /**
-     *
-     *  Komentarų dalis. Nežinau tik dar kaip viską implimentinsiu.
-     *
-     * */
+     * Komentarų dalis. Nežinau tik dar kaip viską implimentinsiu.
+     * <p>
+     * 1. Prasitestavau blogo pridėjima ir atėmimą viskas veikia
+     * <p>
+     * 2. Reikia sukurti atskira kontrolerį komentarų vievinimui.
+     */
 
 //    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
 
-    @GetMapping("/comment/addComment")
-    public String createNewCommentView(@RequestParam(required=false) UUID userId, Model model){
-        model.addAttribute("newComment", new Comment());
-//      TODO  reikia pridėti userio id.
-//        model.addAttribute();
 
-        return "comment";
+//    ar to reikia
+    @GetMapping("/comment/addComment/{blog_id}")
+    public String createNewCommentView(@PathVariable UUID blog_id, Model model) {
+//        1. Čia tricky dalis reikia susirasti ar blogo irašas egzistuoja
+        BlogRecord blogRecord = recordService.getRecord(blog_id);
+        if (!blogRecord.equals(null)) {
+            Comment newComent = new Comment();
+            newComent.setBlogRecord(blogRecord);
+//                1. TODO Reikia su useriu sutvarkyti šią vietą
+//                newComent.setUser();
+
+            model.addAttribute("newComment", newComent);
+
+            return "comment";
+        } else {
+            return "404";
+        }
+
     }
 
-    @PostMapping("/comment/addComment")
-    public String addComment(@Valid Comment comment, Model model){
+    @PostMapping("/comment/addComment/{blog_id}")
+    public String addComment(@Valid Comment comment, Model model) {
         model.addAttribute("newComment", new Comment());
         model.addAttribute("success", "comment was created successfully");
         commentService.addComment(comment);
@@ -124,23 +145,16 @@ public class RecordControler {
     }
 
 
-//    2. Gaunam visus commentarus.
+//    2. Gaunam visus komentarus susijusius su šiuo įrašu.
+//    2.1 siunčiam užklausą servisui ten ir turi atvfiltruoti
 
-//    @PostMapping("/createRecord")
-//    public String createProduct(@Valid BlogRecord blogRecord, Model model){
-//        model.addAttribute("blogRecord", new BlogRecord());
-//        model.addAttribute("success", "blogRecord save successfully");
-//        recordService.addRecord(blogRecord);
-//        return "redirect:/records/all";
+//    @GetMapping("/comment/viewCommentsOfBlog/{blog_id}")
+//    public String viewBlogComments(@PathVariable UUID blog_id, Model model){
+//
+//
+////        Susitvarkom viev blogpost templeitą
+//
 //    }
 
-
-//    // Single user page
-//    @RequestMapping("/users/{userId}")
-//    public String user(@PathVariable Long userId, Model model) {
-//        User user = userService.findById(userId);
-//        model.addAttribute("user", user);
-//        return "user/details";
-//    }
 
 }

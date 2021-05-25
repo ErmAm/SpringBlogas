@@ -12,7 +12,7 @@ public interface UserService {
 
     void addUser(User user);
 
-    User getUser(UUID id);
+    User getUserById(UUID id);
 
     User getUserByName(String username);
 
