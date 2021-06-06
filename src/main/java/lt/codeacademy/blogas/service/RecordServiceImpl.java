@@ -34,7 +34,7 @@ public class RecordServiceImpl implements RecordService {
 
 //   05-02     Čia yra bėdų gali grazina optionalą todėl riekia biški pakeisitmų padaryti.
         return recordRepository.findById(id)
-                .orElseThrow(BlogRecordNotFoundException::new);
+                .orElseThrow(() -> new BlogRecordNotFoundException(id.toString()));
 
     }
 

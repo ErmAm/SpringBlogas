@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
+</head>
+<body class="container">
+  <nav th:replace="fragments/reusable :: navigationBar"></nav>
+  <h1 th:text="'Nerastas blogo įrašas: ' + ${blogID}"></h1>
+</body>
+</html>

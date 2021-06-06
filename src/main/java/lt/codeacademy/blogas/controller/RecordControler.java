@@ -2,6 +2,7 @@ package lt.codeacademy.blogas.controller;
 
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.Comment;
+import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
 import lt.codeacademy.blogas.service.CommentService;
 import lt.codeacademy.blogas.service.MessageService;
 import lt.codeacademy.blogas.service.RecordService;
@@ -10,6 +11,7 @@ import lt.codeacademy.blogas.service.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -43,14 +45,16 @@ public class RecordControler {
         return "blogRecord";
     }
 
-
-//   TODO Redirektas turi eiti į agrindinį blogų lisinimo meniu.
+//    TODO gali nereikėti modelio atributo.
 
     @PostMapping("/createRecord")
-    public String createProduct(@Valid BlogRecord blogRecord) {
-//        model.addAttribute("blogRecord", new BlogRecord());
-//        model.addAttribute("success", "blogRecord save successfully");
+    public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors, Model model) {
+
+        if (errors.hasErrors()){
+            return "blogRecord";
+        }
         recordService.addRecord(blogRecord);
+
 
         return "redirect:/records/all/?message=blogRecord.created.success.message";
     }
@@ -163,6 +167,9 @@ public class RecordControler {
 ////        Susitvarkom viev blogpost templeitą
 //
 //    }
+
+
+
 
 
 }

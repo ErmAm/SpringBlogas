@@ -29,19 +29,28 @@
     -->
 
     <label>Pavadinimas</label>
-    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>
+    <input type="text" placeholder="Naujo įrašo pavadinimas"
+           th:field="*{name}"/>
+
+    <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>
     <br>
+
     <!--  Gali reikėti gali ne-reikėti username -->
     <!--  Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***-->
 
     <label>Vartotojo vardas</label>
-    <input type="text" placeholder="Vartotojo vardas" name="vardas" th:field="*{username}"/>
+    <input type="text" placeholder="Vartotojo vardas" name="vardas"
+           th:field="*{username}"
+    />
+    <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>
     <br>
 
     <label>Turinys</label>
     <br>
-    <textarea rows="20" cols="60" name="comment" th:field="*{text}">
-    </textarea>
+    <textarea rows="20" cols="60" name="comment"
+              th:field="*{text}"
+    />
+    <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>
     <br>
 
     <!-- Su mygtuku biški susižaistir eikia.-->
