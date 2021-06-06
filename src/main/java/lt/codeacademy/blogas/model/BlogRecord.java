@@ -46,7 +46,7 @@ public class BlogRecord {
     private String username;
 
     @NotBlank
-    @Min(10)
+//    @Min(10)
     private String text;
 
 
