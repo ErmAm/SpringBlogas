@@ -9,9 +9,13 @@
           id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!--    TODO čia reikia pasižiūrėti-->
+    <head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 </head>
 
 <body>
+<nav th:replace="fragments/reusable :: navigationBar"></nav>
 
 <div class="container">
     <form class="form-horizontal" action='' method="POST" th:object="${newUser}">

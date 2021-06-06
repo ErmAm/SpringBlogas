@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<nav th:replace="fragments/reusable :: navigationBar"></nav>
 
 <div th:object="${userToWorkWith}">
   <p th:text="${userToWorkWith.username}">

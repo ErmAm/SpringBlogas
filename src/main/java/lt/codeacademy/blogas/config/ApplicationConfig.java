@@ -12,8 +12,19 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
+
+/**
+ *  1. Su lokalės gaudymu viskas baigta naudojamos trys klasės.
+ *
+ *  2. Yra dar viena klasė dirbanti su žinutėmis.
+ *
+ *  3. Message source yra sutvarkytas be jo neištransliuotų nieko į thymeleafą.
+ *
+ * */
+
 @Configuration
 public class ApplicationConfig implements WebMvcConfigurer {
+
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -23,6 +34,7 @@ public class ApplicationConfig implements WebMvcConfigurer {
         return sessionLocaleResolver;
     }
 
+
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -31,8 +43,8 @@ public class ApplicationConfig implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
-
-//    TODO Šotą gali tekti pašalinti vėliau nes jis naudojamas žinučių permetimui.
+//
+//
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource resourceBundleMessageSource = new ReloadableResourceBundleMessageSource();

@@ -3,17 +3,28 @@
 <head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 </head>
 <body>
-<div th:if="${not blogRecordList.hasContent()}">Products list is empty</div>
+<div th:if="${not blogRecordListPage.hasContent()}">Products list is empty</div>
 <!--TODO Čia testuoju messages-->
 
 <nav th:replace="fragments/reusable :: navigationBar"></nav>
 
 
 <!-- Čoa geruilos -->
+
+<!--Čia yra tiesioginis kreipimasis į į blogPag,objekto elementą.
+Iš esmės parsiname thymleafe gautą per referencą objektą.
+-->
 <div class="container p-3 b-3"
-     th:if="${blogRecordList.hasContent()}">
+     th:if="${blogRecordListPage.hasContent()}">
+
 
     <h1>Išparsinam Listą</h1>
+
+<!--  TASK1 Message   Žinutė apie sėkminga blog recordo sukūrimą -->
+    <div th:if="${blogRecordCreatedMsg}" th:text="${blogRecordCreatedMsg}"></div>
+
+
+
     <table border="1px">
         <thead>
         <tr>
@@ -24,7 +35,8 @@
         </thead>
 
         <tbody>
-        <tr th:each="blogRecord: ${blogRecordList}">
+<!--        Čia content yra iš tikro su geteriu, getConent() bet galime užrašyti kaip fieladą-->
+        <tr th:each="blogRecord: ${blogRecordListPage.content}">
             <td><a th:href="@{'/records/' + ${blogRecord.id}}"
                    th:text="${blogRecord.name}">Pavadinimas</a></td>
             <!--          <td th:text="${blogRecord.name}">Pavadinimas</td>-->
@@ -39,16 +51,16 @@
     <div>
         <ul class="pagination">
             <li class="page-item"
-                th:classappend="${blogRecordList.number eq 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} - 1)}"
+                th:classappend="${blogRecordListPage.number eq 0 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/records/all(page=${blogRecordListPage.number} - 1)}"
                    th:text="#{blogRecordList.previous}">Previous</a>
             </li>
 
             <!--Dinaminis max puslapių generavimas-->
             <li class="page-item"
-                th:each="pageNumber : ${#numbers.sequence(0, blogRecordList.totalPages - 1)}"
-                th:classappend="${pageNumber eq blogRecordList.number ? 'active' : ''}">
-                <a class="page-link" th:href="@{/records(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
+                th:each="pageNumber : ${#numbers.sequence(0, blogRecordListPage.totalPages - 1)}"
+                th:classappend="${pageNumber eq blogRecordListPage.number ? 'active' : ''}">
+                <a class="page-link" th:href="@{/records/all(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
 <!--                <a class="page-link"-->
 <!--                   th:with="order=${blogRecordList.sort.iterator().hasNext() ? blogRecordList.sort.iterator().next() : null}"-->
 <!--                   th:href="@{/records(page=${pageNumber}, sort=${order.property + ',' + order.direction})}"-->
@@ -57,13 +69,14 @@
             </li>
 
             <li class="page-item"
-                th:classappend="${blogRecordList.number eq blogRecordList.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records(page=${blogRecordList.number} + 1)}"
-                   th:text="#{blogRecordList.next}"></a>>Next</a>
+                th:classappend="${blogRecordListPage.number eq blogRecordListPage.totalPages - 1 ? 'disabled' : ''}">
+                <a class="page-link" th:href="@{/records/all(page=${blogRecordListPage.number} + 1)}"
+                   th:text="#{blogRecordList.next}">Next</a>
             </li>
         </ul>
 
-        <span th:text="'Total: ' + ${blogRecordList.totalElements}">Total: 100</span>
+        <span th:text="'Total: ' + ${blogRecordListPage.totalElements}">Total: 100</span>
+
     </div>
 
 </div>

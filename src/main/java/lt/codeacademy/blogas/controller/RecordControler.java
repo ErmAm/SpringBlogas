@@ -3,6 +3,7 @@ package lt.codeacademy.blogas.controller;
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.Comment;
 import lt.codeacademy.blogas.service.CommentService;
+import lt.codeacademy.blogas.service.MessageService;
 import lt.codeacademy.blogas.service.RecordService;
 
 import lt.codeacademy.blogas.service.UserService;
@@ -12,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -23,17 +23,23 @@ public class RecordControler {
     private final CommentService commentService;
     private final UserService userService;
 
-    public RecordControler(RecordService newRecordService, CommentService commentService, UserService userService) {
+    private final MessageService messageService;
+
+    public RecordControler(RecordService newRecordService,
+                           CommentService commentService,
+                           UserService userService,
+                           MessageService messageService) {
         this.recordService = newRecordService;
         this.commentService = commentService;
         this.userService = userService;
+        this.messageService = messageService;
     }
 
     //    sukuriam vartotojoą
     @GetMapping("/createRecord")
     public String getSigngleBlogCreationPage(Model model) {
-
         model.addAttribute("blogRecord", new BlogRecord());
+
         return "blogRecord";
     }
 
@@ -41,16 +47,12 @@ public class RecordControler {
 //   TODO Redirektas turi eiti į agrindinį blogų lisinimo meniu.
 
     @PostMapping("/createRecord")
-    public String createProduct(@Valid BlogRecord blogRecord, Model model) {
-        model.addAttribute("blogRecord", new BlogRecord());
-        model.addAttribute("success", "blogRecord save successfully");
-
+    public String createProduct(@Valid BlogRecord blogRecord) {
+//        model.addAttribute("blogRecord", new BlogRecord());
+//        model.addAttribute("success", "blogRecord save successfully");
         recordService.addRecord(blogRecord);
-//        System.out.println(blogRecord);
 
-//        TODO po posto nukreipiam į main puslapį.
-//        aba paliekam stebėti savus blogo įrašus. .
-        return "redirect:/records/all";
+        return "redirect:/records/all/?message=blogRecord.created.success.message";
     }
 
 //    *** 04-30
@@ -79,9 +81,15 @@ public class RecordControler {
 
 
     @GetMapping("/all")
-    public String getRecords(Pageable pageable, Model model) {
+    public String getRecords(Pageable pageable, Model model, String message) {
 //        List<BlogRecord> blogContent = recordService.getRecords();
-        model.addAttribute("blogRecordList", recordService.getBlogRecordsPaginated(pageable));
+        model.addAttribute("blogRecordListPage", recordService.getBlogRecordsPaginated(pageable));
+
+//      Čia reikėjo sudėti žinutes apie sėkmingą operaciją.
+        if (message != null){
+            model.addAttribute("blogRecordCreatedMsg", messageService.getMessage(message));
+        }
+
 
         return "blogMainPage";
     }
