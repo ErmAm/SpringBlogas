@@ -11,7 +11,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/registration")
+@RequestMapping("/public/registration")
 public class userController {
 
     private final UserService userService;

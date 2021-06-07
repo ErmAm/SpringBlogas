@@ -38,7 +38,7 @@ public class RecordControler {
     }
 
     //    sukuriam vartotojoą
-    @GetMapping("/createRecord")
+    @GetMapping("/private/createRecord")
     public String getSigngleBlogCreationPage(Model model) {
         model.addAttribute("blogRecord", new BlogRecord());
 
@@ -47,7 +47,7 @@ public class RecordControler {
 
 //    TODO gali nereikėti modelio atributo.
 
-    @PostMapping("/createRecord")
+    @PostMapping("/private/createRecord")
     public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors, Model model) {
 
         if (errors.hasErrors()){
@@ -62,7 +62,7 @@ public class RecordControler {
 //    *** 04-30
 
     //    ieškom produkto pagal pavadinimą.
-    @GetMapping("/findRecordByName")
+    @GetMapping("public/findRecordByName")
     public String getRecordByName(@RequestParam String name, Model model) {
         model.addAttribute("blogRecord", recordService.getByUsername(name));
         return "blogRecord";
@@ -70,21 +70,21 @@ public class RecordControler {
 
 
     //    Updeitianam dar reikia posta pridėti updeitui.
-    @GetMapping("/update")
+    @GetMapping("/private/update")
     public String updateRecord(@RequestParam UUID id, Model model) {
         BlogRecord blogRecord = recordService.getRecord(id);
         model.addAttribute("blogRecord", blogRecord);
         return "blogRecord";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/private/update")
     public String updateRecord(BlogRecord blogRecord, Model model) {
         recordService.update(blogRecord);
-        return "redirect:/records/all";
+        return "redirect:/public/records/all";
     }
 
 
-    @GetMapping("/all")
+    @GetMapping("public/all")
     public String getRecords(Pageable pageable, Model model, String message) {
 //        List<BlogRecord> blogContent = recordService.getRecords();
         model.addAttribute("blogRecordListPage", recordService.getBlogRecordsPaginated(pageable));
@@ -99,7 +99,7 @@ public class RecordControler {
     }
 
     //    05-03 gauname vieną blogo įrašą
-    @GetMapping("/{id}")
+    @GetMapping("public/{id}")
     public String getBlogRecord(@PathVariable final UUID id, Model model) {
 
 //      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
@@ -129,7 +129,7 @@ public class RecordControler {
 
 
 //    ar to reikia
-    @GetMapping("/comment/addComment/{blog_id}")
+    @GetMapping("private/comment/addComment/{blog_id}")
     public String createNewCommentView(@PathVariable UUID blog_id, Model model) {
 //        1. Čia tricky dalis reikia susirasti ar blogo irašas egzistuoja
         BlogRecord blogRecord = recordService.getRecord(blog_id);
@@ -148,12 +148,12 @@ public class RecordControler {
 
     }
 
-    @PostMapping("/comment/addComment/{blog_id}")
+    @PostMapping("private/comment/addComment/{blog_id}")
     public String addComment(@Valid Comment comment, Model model) {
         model.addAttribute("newComment", new Comment());
         model.addAttribute("success", "comment was created successfully");
         commentService.addComment(comment);
-        return "redirect:/records/all";
+        return "redirect:/public/records/all";
     }
 
 

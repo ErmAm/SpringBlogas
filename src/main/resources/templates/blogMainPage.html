@@ -35,9 +35,9 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
     <table border="1px">
         <thead>
         <tr>
-            <th>Pavadinimas</th>
-            <th>Vartotojo vardas</th>
-            <th>Turynys</th>
+            <th th:text="#{blog.record.title}">Pavadinimas</th>
+            <th th:text="#{blog.record.creator.useranme}">Vartotojo vardas</th>
+            <th th:text="#{blog.record.content}">Turynys</th>
         </tr>
         </thead>
 
@@ -59,7 +59,7 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
         <ul class="pagination">
             <li class="page-item"
                 th:classappend="${blogRecordListPage.number eq 0 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records/all(page=${blogRecordListPage.number} - 1)}"
+                <a class="page-link" th:href="@{/records/public/all(page=${blogRecordListPage.number} - 1)}"
                    th:text="#{blogRecordList.previous}">Previous</a>
             </li>
 
@@ -67,7 +67,7 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
             <li class="page-item"
                 th:each="pageNumber : ${#numbers.sequence(0, blogRecordListPage.totalPages - 1)}"
                 th:classappend="${pageNumber eq blogRecordListPage.number ? 'active' : ''}">
-                <a class="page-link" th:href="@{/records/all(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
+                <a class="page-link" th:href="@{/records/public/all(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
 <!--                <a class="page-link"-->
 <!--                   th:with="order=${blogRecordList.sort.iterator().hasNext() ? blogRecordList.sort.iterator().next() : null}"-->
 <!--                   th:href="@{/records(page=${pageNumber}, sort=${order.property + ',' + order.direction})}"-->
@@ -77,7 +77,7 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
 
             <li class="page-item"
                 th:classappend="${blogRecordListPage.number eq blogRecordListPage.totalPages - 1 ? 'disabled' : ''}">
-                <a class="page-link" th:href="@{/records/all(page=${blogRecordListPage.number} + 1)}"
+                <a class="page-link" th:href="@{/records/public/all(page=${blogRecordListPage.number} + 1)}"
                    th:text="#{blogRecordList.next}">Next</a>
             </li>
         </ul>

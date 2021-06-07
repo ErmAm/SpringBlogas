@@ -6,14 +6,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
 //    Reikia naudoti query ir negaloti
 
+
+
     @Query("SELECT u FROM User u WHERE u.username= :userName")
     User findUserByName(@Param("userName") String userName);
+
+    @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.name = :name")
+    Optional<User> findByNameWithRoles(@Param("name") String name);
 
 
 //  05-07  Panašu kad paprasčiau bus pasinaudoti paprastais queriais, nei ieškoti kas padaryta su JPARepo.

@@ -6,12 +6,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -20,7 +25,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "user")
 
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
@@ -42,9 +47,8 @@ public class User {
     @NotBlank
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @ManyToMany
+    private Set<Role> roles;
 
     // 05-07 TODO šitas  kels bėdų ir vėliau. Time objektas nešneka su hiberneitu
 //    @NotBlank
@@ -56,6 +60,31 @@ public class User {
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
     private List<BlogRecord> userBlogRecordsList;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 //    Taip pat useris kuria komentarus
 

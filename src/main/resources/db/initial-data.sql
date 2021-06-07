@@ -44,18 +44,20 @@ VALUES ('7a580a64-a414-31dc-8d61-52aad9ff2225', 'Kai niežti rankos', 'Solomon',
 -- ('7a580a64-a414-40dc-8d61-52a979ff2225','Nieko nezinau', 'Paranas', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert'),
 -- ('7a580a64-a414-40dc-8d61-52a179ff2225','Viso gero geri geria', 'Gvadelupė', 'O kad tave, ir vėl gelda kiaura. Kiaulas nėr kuom šert');
 
-INSERT INTO role(id, role_name)
+INSERT INTO roles(id, name)
 VALUES ('00000000-0000-0000-000f-00000000000a', 'ADMIN'),
-       ('00000000-0000-0000-000f-000000000001', 'USER'),
-       ('00000000-0000-0000-000f-0000000000ff', 'PUBLIC');
+       ('00000000-0000-0000-000f-000000000001', 'USER');
 
 
+INSERT INTO user(id, name, password, surname, email, username)
+VALUES
+       ('00000000-0000-000u-000f-000000000001', 'admin', '{bcrypt}$2y$12$GUD1vHLIWiUp6g/O2DI7Su7TeoU0ToQ1hkiiu4KjjYvH9PDBBxJy6','pavardenis','plepys@webas.lt','admin'),
+       ('00000000-0000-000u-000f-000000000002', 'user', '{bcrypt}$2y$12$FkJkQlwGgXY88Zkrw4WxnuxbXSGIMAaUcLcfixTXQs3KS.AhY2Wyy','subacius','nesakysiu@zebra.lt','public');
 
-INSERT INTO user(id, name, password, surname,email, username, role_id)
-VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','plepys@webas.lt','user1','00000000-0000-0000-000f-000000000001'),
-       ('7a580a64-1234-0002-8d61-52ad7aff2125', 'zbignevas', 'aaaa','subacius','nesakysiu@zebra.lt','user2','00000000-0000-0000-000f-000000000001');
-
-
+INSERT INTO user_roles(user_id, roles_id)
+VALUES('00000000-0000-000u-000f-000000000001', '00000000-0000-0000-000f-00000000000a'), /* user -> USER ROLE */
+        ('00000000-0000-000u-000f-000000000002', '00000000-0000-0000-000f-000000000001');
+-- ('7a580a64-a414-40dc-8861-52aa79ff2258', '7a580a64-a414-40dc-8861-52aa79ff2258'); /* admin -> USER, ADMIN ROLES */
 -- INSERT INTO comment(id, content, blog_id, user_id)
 -- VALUES ('00000000-000c-000a-000f-00000000000a', 'Piktas komentaras','7a580a64-a414-31dc-8d61-52aad9ff22ff','00000000-0000-0000-000f-00000000000a');
 
@@ -64,3 +66,6 @@ VALUES ('7a580a64-1234-0001-8d61-52ad7aff2125', 'alanas', '123','pavardenis','pl
 --
 --        ('00000000-0000-000a-000f-000000000001', 'USER'),
 --        ('00000000-0000-000a-000f-0000000000ff', 'PUBLIC');
+
+
+-- ('00000000-0000-000u-000f-000000000001', 'alanas', '123','pavardenis','plepys@webas.lt','alanas','00000000-0000-0000-000f-000000000001'),
