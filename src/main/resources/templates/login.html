@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
+<body>
+
+<!--todo reikia sutrvakyti lt kalbą.-->
+
+<div class="container">
+
+    <div th:if="${param.error ne null}" class="alert alert-danger" th:text="#{login.bad.message}">
+    </div>
+
+    <h3 th:text="#{login.welcome.message}"></h3>
+
+    <form method="POST" th:action="@{/login}">
+        <div class="mb-3">
+            <label class="form-label" for="name" th:text="#{login.name}"></label>
+            <input class="form-control" id="name" name="loginName">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="password" th:text="#{login.password}"></label>
+            <input class="form-control" id="password" type="password" name="loginPassword">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+</div>
+
+</body>
+</html>
