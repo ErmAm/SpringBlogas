@@ -4,6 +4,7 @@ import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         return userRepository.findByNameWithRoles(username)

@@ -51,12 +51,12 @@ VALUES ('00000000-0000-0000-000f-00000000000a', 'ADMIN'),
 
 INSERT INTO user(id, name, password, surname, email, username)
 VALUES
-       ('00000000-0000-000u-000f-000000000001', 'admin', '{bcrypt}$2y$12$GUD1vHLIWiUp6g/O2DI7Su7TeoU0ToQ1hkiiu4KjjYvH9PDBBxJy6','pavardenis','plepys@webas.lt','admin'),
-       ('00000000-0000-000u-000f-000000000002', 'user', '{bcrypt}$2y$12$FkJkQlwGgXY88Zkrw4WxnuxbXSGIMAaUcLcfixTXQs3KS.AhY2Wyy','subacius','nesakysiu@zebra.lt','public');
+       ('00000000-0000-000a-000f-000000000001', 'admin', '{bcrypt}$2y$12$GUD1vHLIWiUp6g/O2DI7Su7TeoU0ToQ1hkiiu4KjjYvH9PDBBxJy6','pavardenis','plepys@webas.lt','admin'),
+       ('00000000-0000-000a-000f-000000000002', 'user', '{bcrypt}$2y$12$FkJkQlwGgXY88Zkrw4WxnuxbXSGIMAaUcLcfixTXQs3KS.AhY2Wyy','subacius','nesakysiu@zebra.lt','public');
 
 INSERT INTO user_roles(user_id, roles_id)
-VALUES('00000000-0000-000u-000f-000000000001', '00000000-0000-0000-000f-00000000000a'), /* user -> USER ROLE */
-        ('00000000-0000-000u-000f-000000000002', '00000000-0000-0000-000f-000000000001');
+VALUES('00000000-0000-000a-000f-000000000001', '00000000-0000-0000-000f-00000000000a'), /* user -> USER ROLE */
+        ('00000000-0000-000a-000f-000000000002', '00000000-0000-0000-000f-000000000001');
 -- ('7a580a64-a414-40dc-8861-52aa79ff2258', '7a580a64-a414-40dc-8861-52aa79ff2258'); /* admin -> USER, ADMIN ROLES */
 -- INSERT INTO comment(id, content, blog_id, user_id)
 -- VALUES ('00000000-000c-000a-000f-00000000000a', 'Piktas komentaras','7a580a64-a414-31dc-8d61-52aad9ff22ff','00000000-0000-0000-000f-00000000000a');

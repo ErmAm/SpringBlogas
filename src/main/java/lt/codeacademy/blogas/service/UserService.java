@@ -4,6 +4,7 @@ import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,8 @@ public interface UserService {
     void update(User user);
 
     void delete(UUID uuid);
+
+    UserDetails loadUserByUsername(String username);
 
 //    //    Atsirado poreikis rasti blogą pagal pvz useri
 //    BlogRecord getByUsername(String name);

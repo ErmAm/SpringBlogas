@@ -44,7 +44,7 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
         <tbody>
 <!--        Čia content yra iš tikro su geteriu, getConent() bet galime užrašyti kaip fieladą-->
         <tr th:each="blogRecord: ${blogRecordListPage.content}">
-            <td><a th:href="@{'/records/' + ${blogRecord.id}}"
+            <td><a th:href="@{'/records/public/' + ${blogRecord.id}}"
                    th:text="${blogRecord.name}">Pavadinimas</a></td>
             <!--          <td th:text="${blogRecord.name}">Pavadinimas</td>-->
             <td th:text="${blogRecord.username}">Vartotojo vardas</td>
