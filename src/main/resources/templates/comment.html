@@ -16,15 +16,32 @@
             <div th:if="${newComment.blogRecord.id}"></div>
             <div th:text="${newComment.blogRecord.name}"></div>
             <div th:text="${newComment.blogRecord.user}"></div>
-            <form th:method="post" th:object="${newComment}"
-                      th:action="@{'/records/private/addComment/' + ${newComment.blogRecord.id}}">
-                <label>Pavadinimas</label>
-                <!--    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
-                <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
-                <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
-                <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
-            </form>
+            <div th:if="${newComment.id}">
+                <form th:method="post" th:object="${newComment}"
+                      th:action="@{'/records/private/updateComment/' + ${newComment.id}}">
+
+                    <label>Pavadinimas</label>
+                    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+                    <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
+
+                    <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
+                </form>
+            </div>
+
+            <div th:unless="${newComment.id}">
+                <form th:method="post" th:object="${newComment}"
+                      th:action="@{'/records/private/addComment/' + ${newComment.blogRecord.id}}">
+
+                    <label>Pavadinimas</label>
+                    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+                    <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
+
+                    <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
 </div>

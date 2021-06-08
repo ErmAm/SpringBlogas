@@ -54,7 +54,7 @@ public class RecordControler {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors, Model model) {
 
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "blogRecord";
         }
         recordService.addRecord(blogRecord);
@@ -79,7 +79,7 @@ public class RecordControler {
         model.addAttribute("blogRecordListPage", recordService.getBlogRecordsPaginated(pageable));
 
 //      Čia reikėjo sudėti žinutes apie sėkmingą operaciją.
-        if (message != null){
+        if (message != null) {
             model.addAttribute("blogRecordCreatedMsg", messageService.getMessage(message));
         }
 
@@ -95,7 +95,7 @@ public class RecordControler {
 //        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
 
         BlogRecord blogRecord = recordService.getRecord(id);
-        if (!blogRecord.equals(null)){
+        if (!blogRecord.equals(null)) {
 
             model.addAttribute("associatedComments", commentService.filteredByBlogComments(id));
             model.addAttribute("blogRecordToView", blogRecord);
@@ -106,13 +106,10 @@ public class RecordControler {
     }
 
     /**
-     *
      * Pridedu delete mygtuką
-     *
+     * <p>
      * 1. Sutvarkytas daugiau minčių nėra
-     *
-     *
-     * */
+     */
 
 
     @PostMapping("private/delete/{id}")
@@ -124,8 +121,7 @@ public class RecordControler {
 
     /**
      * Updeitas
-     *
-     * */
+     */
     //   1. Patikrinu ar bent veikia
     @GetMapping("/private/update/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -138,7 +134,7 @@ public class RecordControler {
     @PostMapping("/private/update/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String updateRecord(@Valid BlogRecord blogRecord, Model model, BindingResult errors) {
-        if (errors.hasErrors()){
+        if (errors.hasErrors()) {
             return "blogRecord";
         }
         recordService.update(blogRecord);
@@ -154,8 +150,6 @@ public class RecordControler {
      */
 
 //    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
-
-
     @GetMapping("private/addComment/{blog_id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String createNewCommentView(@PathVariable UUID blog_id, Model model) {
@@ -180,24 +174,53 @@ public class RecordControler {
         String blogoID = comment.getBlogRecord().getId().toString();
 
         commentService.addComment(comment);
-        return "redirect:/records/public/"+ blogoID;
+        return "redirect:/records/public/" + blogoID;
     }
 
-//    Pridedam updeitą
+//       @GetMapping("/private/update/{id}")
+//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+//    public String updateRecord(@PathVariable UUID id, Model model) {
+//        BlogRecord blogRecord = recordService.getRecord(id);
+//        model.addAttribute("blogRecord", blogRecord);
+//        return "blogRecord";
+//    }
+//
+//    @PostMapping("/private/update/{id}")
+//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+//    public String updateRecord(@Valid BlogRecord blogRecord, Model model, BindingResult errors) {
+//        if (errors.hasErrors()){
+//            return "blogRecord";
+//        }
+//        recordService.update(blogRecord);
+//        return "redirect:/records/public/all";
+//    }
 
 
+    //    Pridedam updeitą
+    @GetMapping("private/updateComment/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public String updateComment(@PathVariable UUID id, Model model) {
+        Comment commentToUpdate = commentService.getComment(id);
+        model.addAttribute("newComment", commentToUpdate);
+        return "comment";
+    }
 
+    @PostMapping("private/updateComment/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public String updateComment(@Valid Comment comment) {
+        String blogID = comment.getBlogRecord().getId().toString();
+        commentService.update(comment);
+        return "redirect:/records/public/" + blogID;
+    }
+
+    //    Trynimas done
     @PostMapping("/private/deleteComment/{id}")
-    public String deleteComment(@PathVariable final UUID id){
+    public String deleteComment(@PathVariable final UUID id) {
 
         String blogID = commentService.getComment(id).getBlogRecord().getId().toString();
         commentService.delete(id);
         return "redirect:/records/public/" + blogID;
     }
-
-
-
-
 
 
 }
