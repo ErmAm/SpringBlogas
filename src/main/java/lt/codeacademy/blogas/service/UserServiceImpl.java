@@ -28,8 +28,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("'" + username + "' not found!"));
     }
 
-
-
     @Override
     public void addUser(User newUser) {
         userRepository.save(newUser);

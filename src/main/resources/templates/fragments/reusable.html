@@ -45,9 +45,10 @@
                 class="nav-item"><a class="nav-link" href="/records/private/createRecord"
                                     th:text="#{navbar.create.new.record}">Create New Record</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="/registration/createUser"
+
+            <li sec:authorize="!isAuthenticated()"
+                    class="nav-item"><a class="nav-link" href="/registration/createUser"
                                     th:text="#{navbar.registration}">Registration</a></li>
-            <li class="nav-item"><a class="nav-link" href="/records/private/addComment">Add Comment</a></li>
             <li class="nav-item"
                 th:insert="fragments/reusable :: languageSelection">
                 <div class="mt-4">

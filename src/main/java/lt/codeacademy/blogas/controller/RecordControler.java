@@ -2,6 +2,7 @@ package lt.codeacademy.blogas.controller;
 
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.Comment;
+import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
 import lt.codeacademy.blogas.service.CommentService;
 import lt.codeacademy.blogas.service.MessageService;
@@ -41,29 +42,25 @@ public class RecordControler {
 
     //    sukuriam vartotojoą
     @GetMapping("/private/createRecord")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    public String getSigngleBlogCreationPage(Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public String getSigngleBlogCreationPage(Model model, User user) {
         model.addAttribute("blogRecord", new BlogRecord());
-
+        model.addAttribute("currentUser", user);
         return "blogRecord";
     }
 
-//    TODO gali nereikėti modelio atributo.
-
     @PostMapping("/private/createRecord")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors, Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors) {
 
         if (errors.hasErrors()) {
             return "blogRecord";
         }
         recordService.addRecord(blogRecord);
 
-
         return "redirect:/records/public/all/?message=blogRecord.created.success.message";
     }
 
-//    *** 04-30
 
     //    ieškom produkto pagal pavadinimą.
     @GetMapping("public/findRecordByName")
@@ -99,6 +96,7 @@ public class RecordControler {
 
             model.addAttribute("associatedComments", commentService.filteredByBlogComments(id));
             model.addAttribute("blogRecordToView", blogRecord);
+
             return "viewBlogRecord";
         } else {
             return "404";
@@ -113,7 +111,7 @@ public class RecordControler {
 
 
     @PostMapping("private/delete/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String deleteBlogRecord(@PathVariable final UUID id) {
         recordService.delete(id);
         return "redirect:/records/public/all";
@@ -122,9 +120,9 @@ public class RecordControler {
     /**
      * Updeitas
      */
-    //   1. Patikrinu ar bent veikia
+
     @GetMapping("/private/update/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String updateRecord(@PathVariable UUID id, Model model) {
         BlogRecord blogRecord = recordService.getRecord(id);
         model.addAttribute("blogRecord", blogRecord);
@@ -132,7 +130,7 @@ public class RecordControler {
     }
 
     @PostMapping("/private/update/{id}")
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String updateRecord(@Valid BlogRecord blogRecord, Model model, BindingResult errors) {
         if (errors.hasErrors()) {
             return "blogRecord";
@@ -163,40 +161,17 @@ public class RecordControler {
         } else {
             return "404";
         }
-
     }
 
     @PostMapping("private/addComment/{blog_id}")
     public String addComment(@Valid Comment comment, Model model) {
         model.addAttribute("newComment", new Comment());
         model.addAttribute("success", "comment was created successfully");
-
         String blogoID = comment.getBlogRecord().getId().toString();
-
         commentService.addComment(comment);
         return "redirect:/records/public/" + blogoID;
     }
 
-//       @GetMapping("/private/update/{id}")
-//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-//    public String updateRecord(@PathVariable UUID id, Model model) {
-//        BlogRecord blogRecord = recordService.getRecord(id);
-//        model.addAttribute("blogRecord", blogRecord);
-//        return "blogRecord";
-//    }
-//
-//    @PostMapping("/private/update/{id}")
-//    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-//    public String updateRecord(@Valid BlogRecord blogRecord, Model model, BindingResult errors) {
-//        if (errors.hasErrors()){
-//            return "blogRecord";
-//        }
-//        recordService.update(blogRecord);
-//        return "redirect:/records/public/all";
-//    }
-
-
-    //    Pridedam updeitą
     @GetMapping("private/updateComment/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String updateComment(@PathVariable UUID id, Model model) {
@@ -213,10 +188,8 @@ public class RecordControler {
         return "redirect:/records/public/" + blogID;
     }
 
-    //    Trynimas done
     @PostMapping("/private/deleteComment/{id}")
     public String deleteComment(@PathVariable final UUID id) {
-
         String blogID = commentService.getComment(id).getBlogRecord().getId().toString();
         commentService.delete(id);
         return "redirect:/records/public/" + blogID;

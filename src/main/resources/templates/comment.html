@@ -12,32 +12,40 @@
 
     <div class="row">
         <div class="col-4">
-            <!--Testuoju ką gavau-->
+
+
+            <label th:text="#{comments.label.name}">Pavadinimas</label>
+
             <div th:if="${newComment.blogRecord.id}"></div>
             <div th:text="${newComment.blogRecord.name}"></div>
             <div th:text="${newComment.blogRecord.user}"></div>
 
             <div th:if="${newComment.id}">
-                <form th:method="post" th:object="${newComment}"
+                <form th:method="POST"
+                      th:object="${newComment}"
                       th:action="@{'/records/private/updateComment/' + ${newComment.id}}">
 
-                    <label>Pavadinimas</label>
-                    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+                    <textarea rows="10" cols="60" class="form-control"
+                              th:field="${newComment.content}"/>
                     <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
-                    <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            th:text="#{comments.submit.button}">Sukurti komentarą</button>
                 </form>
             </div>
 
             <div th:unless="${newComment.id}">
-                <form th:method="post" th:object="${newComment}"
+                <form th:method="POST" th:object="${newComment}"
                       th:action="@{'/records/private/addComment/' + ${newComment.blogRecord.id}}">
 
-                    <label>Pavadinimas</label>
-                    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+                    <textarea rows="10" cols="60" class="form-control"
+                           th:field="${newComment.content}"/>
                     <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
-                    <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
+                    <button type="submit"
+                            class="btn btn-primary"
+                            th:text="#{comments.submit.button}">Sukurti komentarą</button>
                 </form>
             </div>
 

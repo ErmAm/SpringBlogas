@@ -33,15 +33,9 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public BlogRecord getRecord(UUID id) {
-
-//   05-02     Čia yra bėdų gali grazina optionalą todėl riekia biški pakeisitmų padaryti.
         return recordRepository.findById(id)
                 .orElseThrow(() -> new BlogRecordNotFoundException(id.toString()));
-
     }
-
-
-
 
     @Override
     public List<BlogRecord> getRecords() {  // 05-03 suveike
@@ -62,17 +56,13 @@ public class RecordServiceImpl implements RecordService {
         }else {
             throw new BlogRecordNotFoundException(id.toString());
         }
-
     }
 
-//    TODO biški nepagaunu šitos implimentacijos. Iš kur jis repo guana info?
     @Override
     public BlogRecord getByUsername(String name) {
         return recordRepository.findByUsername(name).get(0);
     }
 
-
-    // 05-04 Pridedu paginationa
     @Override
     public Page<BlogRecord> getBlogRecordsPaginated(Pageable pageable) {
         return recordRepository.findAll(pageable);

@@ -20,22 +20,29 @@
             <form method="post" th:object="${blogRecord}"
                   th:action="@{'/records/private/update/' + ${blogRecord.id}}">
 
-                <label>Pavadinimas</label>
-                <input type="text" placeholder="Naujo įrašo pavadinimas"
+                <label th:text="#{blog.record.label.name}">Pavadinimas</label>
+                <input type="text"
+                       th:placeholder="#{blog.record.name}"
                        th:field="*{name}"/>
 
-                <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>
+                <p th:class="${#fields.hasErrors('name')}"
+                   th:errors="*{name}">Blogname errors</p>
                 <br>
 
-                <label>Vartotojo vardas</label>
-                <input type="text" placeholder="Vartotojo vardas" name="vardas"
+                <label th:text="#{blog.record.label.username}">Vartotojo vardas</label>
+
+                <input type="text"
+                       th:placeholder="#{blog.record.text.placeholder}"
+                       name="usernameLocal"
+                       id="username"
                        th:field="*{username}"
-                       th:errorclass="fieldError"
-                />
-                <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>
+                       th:errorclass="fieldError"/>
+
+                <p th:class="${#fields.hasErrors('username')}"
+                   th:errors="*{username}">Username errors</p>
                 <br>
 
-                <label>Turinys</label>
+                <label th:text="#{blog.record.label.content}">Turinys</label>
                 <br>
                 <textarea rows="20" cols="60" name="comment"
                           th:field="*{text}"
@@ -44,7 +51,9 @@
                 <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>
                 <br>
 
-                <button class="btn btn-primary" type="submit">Sukurti įrašą</button>
+                <button class="btn btn-primary"
+                        type="submit"
+                        th:text="#{blog.record.create.button}">Sukurti įrašą</button>
             </form>
         </div>
 
@@ -54,34 +63,68 @@
             <form method="post" th:object="${blogRecord}"
                   th:action="@{/records/private/createRecord}">
 
-                <label>Pavadinimas</label>
-                <input type="text" placeholder="Naujo įrašo pavadinimas"
+                <label th:text="#{blog.record.label.name}">Pavadinimas</label>
+                <input type="text"
+                       th:placeholder="#{blog.record.name}"
                        th:field="*{name}"/>
 
-                <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>
+                <p th:class="${#fields.hasErrors('name')}"
+                   th:errors="*{name}">Blogname errors</p>
                 <br>
 
-                <!--  Gali reikėti gali ne-reikėti username -->
-                <!--  Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***-->
+                <label th:text="#{blog.record.label.username}">Vartotojo vardas</label>
 
-                <label>Vartotojo vardas</label>
-                <input type="text" placeholder="Vartotojo vardas" name="vardas"
+                <input type="text"
+                       th:placeholder="#{blog.record.text.placeholder}"
+                       name="usernameLocal"
+                       id="username"
                        th:field="*{username}"
-                       th:errorclass="fieldError"
-                />
-                <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>
+                       th:errorclass="fieldError"/>
+
+                <p th:class="${#fields.hasErrors('username')}"
+                   th:errors="*{username}">Username errors</p>
                 <br>
 
-                <label>Turinys</label>
+                <label th:text="#{blog.record.label.content}">Turinys</label>
                 <br>
                 <textarea rows="20" cols="60" name="comment"
                           th:field="*{text}"
                 />
+
                 <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>
                 <br>
 
-                <!-- Su mygtuku biški susižaistir eikia.-->
-                <button class="btn btn-primary" type="submit">Sukurti įrašą</button>
+                <button class="btn btn-primary"
+                        type="submit"
+                        th:text="#{blog.record.create.button}">Sukurti įrašą</button>
+<!--                <label>Pavadinimas</label>-->
+<!--                <input type="text" placeholder="Naujo įrašo pavadinimas"-->
+<!--                       th:field="*{name}"/>-->
+
+<!--                <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>-->
+<!--                <br>-->
+
+<!--                &lt;!&ndash;  Gali reikėti gali ne-reikėti username &ndash;&gt;-->
+<!--                &lt;!&ndash;  Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***&ndash;&gt;-->
+
+<!--                <label>Vartotojo vardas</label>-->
+<!--                <input type="text" placeholder="Vartotojo vardas" name="vardas"-->
+<!--                       th:field="*{username}"-->
+<!--                       th:errorclass="fieldError"-->
+<!--                />-->
+<!--                <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>-->
+<!--                <br>-->
+
+<!--                <label>Turinys</label>-->
+<!--                <br>-->
+<!--                <textarea rows="20" cols="60" name="comment"-->
+<!--                          th:field="*{text}"-->
+<!--                />-->
+<!--                <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>-->
+<!--                <br>-->
+
+<!--                &lt;!&ndash; Su mygtuku biški susižaistir eikia.&ndash;&gt;-->
+<!--                <button class="btn btn-primary" type="submit">Sukurti įrašą</button>-->
 
             </form>
         </div>
