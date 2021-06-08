@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--<head th:replace="fragments/reusable :: header(#{existingUser.header.title})">-->
 <!--</head>-->
 
@@ -52,22 +53,20 @@
                 </div>
             </div>
 
-            <div>
-<!--                @{'/records/public/' + ${blogRecord.id}}-->
-<!--                -->
-
-                <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
+            <div sec:authorize="isAuthenticated()">
+                <div sec:authorize="hasRole('USER') or hasRole('ADMIN')">
+                <span>
+                    <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
                     <button type="submit" class="btn btn-primary">
                         Delete
                     </button>
                 </form>
 
                 <a class="btn btn-primary" th:href="@{'/records/private/update/' + ${blogRecordToView.id}}">Update</a>
+                </span>
 
-
+                </div>
             </div>
-
-
 
 
             <h3>Comments</h3>
@@ -88,26 +87,5 @@
 
 </div>
 
-
-<!--        <table border="1px">-->
-<!--            <thead>-->
-<!--            <tr>-->
-<!--                <th>Pavadinimas</th>-->
-<!--                <th>Vartotojo vardas</th>-->
-<!--                <th>Turynys</th>-->
-<!--            </tr>-->
-<!--            </thead>-->
-
-<!--            <tbody>-->
-<!--            <tr th:object="${blogRecordToView}">-->
-<!--                <td th:text="${blogRecordToView.name}">Pavadinimas</td>-->
-<!--                <td th:text="${blogRecordToView.username}">Vartotojo vardas</td>-->
-<!--                <td th:text="${blogRecordToView.text}">Pavadinimas</td>-->
-
-<!--                &lt;!&ndash;      <td th:text="${blogRecordToView.id}">ID</td>&ndash;&gt;-->
-
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
 </body>
 </html>

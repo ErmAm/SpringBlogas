@@ -4,42 +4,73 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="header(title)">
-  <meta charset="UTF-8">
-  <title th:text="*{title}"></title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title th:text="*{title}"></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <link th:href="@{/css/style.css}" rel="stylesheet"/>
-<!--  <script th:src="@{/js/language.js}" type="text/javascript"></script>-->
-<!--  <script type="text/javascript" src="js/language.js"></script>-->
-<!--  <script type="text/javascript" src="js/language.js"></script>-->
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <!--  <script th:src="@{/js/language.js}" type="text/javascript"></script>-->
+    <!--  <script type="text/javascript" src="js/language.js"></script>-->
+    <!--  <script type="text/javascript" src="js/language.js"></script>-->
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </head>
 
 <!--Pridedam kalbos fragmenta-->
 <div th:fragment="languageSelection">
-  <span th:text="#{lang.change}"></span>
-  <select id="languageSelector">
-    <option value=""></option>
-    <option value="EN" th:text="#{lang.en}">en</option>
-    <option value="LT" th:text="#{lang.lt}">lt</option>
-  </select>
+    <span th:text="#{lang.change}"></span>
+    <select id="languageSelector">
+        <option value=""></option>
+        <option value="EN" th:text="#{lang.en}">en</option>
+        <option value="LT" th:text="#{lang.lt}">lt</option>
+    </select>
 
 </div>
 
-
-
 <nav th:fragment="navigationBar">
-  <ul class="nav navbar-light bg-light">
-    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="/records/public/all">All Records</a></li>
-    <li class="nav-item"><a class="nav-link" href="/records/private/createRecord">Create New Record</a></li>
-    <li class="nav-item"><a class="nav-link" href="/registration/createUser">Registration</a></li>
-    <li class="nav-item"><a class="nav-link" href="/records/private/addComment">Add Comment</a></li>
-    <li class="nav-item" th:insert="fragments/reusable :: languageSelection"> Select Language</li>
-  </ul>
+    <div>
+        <ul class="nav navbar-light bg-light">
+            <li class="nav-item"><a class="nav-link" href="/" th:text="#{navbar.home.link}">Home</a></li>
+
+            <li sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')"
+                class="nav-item"><a class="nav-link" href="/records/private/createRecord"
+                                    th:text="#{navbar.create.new.record}">Create New Record</a></li>
+
+            <li class="nav-item"><a class="nav-link" href="/registration/createUser"
+                                    th:text="#{navbar.registration}">Registration</a></li>
+            <li class="nav-item"><a class="nav-link" href="/records/private/addComment">Add Comment</a></li>
+            <li class="nav-item"
+                th:insert="fragments/reusable :: languageSelection">
+                <div class="mt-4">
+                    Select Language
+                </div>
+            </li>
+
+            <li>
+                <div>
+                <span class="m-3" sec:authorize="isAuthenticated()"
+                      sec:authentication="principal.name">
+                </span>
+                    <span sec:authorize="!isAuthenticated()">
+                <a class="nav-link"
+                   th:href="@{/login}"
+                   th:text="#{navbar.login.text}"
+                ></a>
+                    </span>
+                </div>
+            </li>
+        </ul>
+
+    </div>
 </nav>
 
 
