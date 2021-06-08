@@ -1,10 +1,13 @@
 package lt.codeacademy.blogas.service;
 
 import lt.codeacademy.blogas.model.Comment;
+import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
+import lt.codeacademy.blogas.model.exception.CommentNotFoundException;
 import lt.codeacademy.blogas.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -25,7 +28,7 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public Comment getComment(UUID id) {
-        return null;
+        return commentRepository.findById(id).orElseThrow(() -> new BlogRecordNotFoundException(id.toString()));
     }
 
     /** TODO Nereikia pamiršti suimplimentinti errora jei nebus rastas komentaras.
@@ -49,6 +52,12 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     public void delete(UUID id) {
+         Optional<Comment> blogForDelete = commentRepository.findById(id);
+        if (blogForDelete.isPresent()){
+            commentRepository.deleteById(id);
+        }else {
+            throw new CommentNotFoundException(id.toString());
+        }
 
     }
 

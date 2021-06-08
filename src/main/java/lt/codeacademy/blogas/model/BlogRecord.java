@@ -55,11 +55,6 @@ public class BlogRecord {
     @JoinColumn(name="user_id")
     private User user;
 
-//    @OneToMany(cascade = CascadeType.ALL,
-//            mappedBy = "blogrecord")
-////    @JoinColumn(name="comment_id")
-
-
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "blogRecord")
     private List<Comment> comments = new ArrayList<>();

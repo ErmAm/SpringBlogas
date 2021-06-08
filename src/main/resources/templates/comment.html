@@ -1,54 +1,33 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 <body>
 
 <nav th:replace="fragments/reusable :: navigationBar"></nav>
 
 
-<!--    pridedam komentaro formą -->
-
-<h1> Hi I am comment</h1>
-
 <div class="container">
 
+    <div class="row">
+        <div class="col-4">
+            <!--Testuoju ką gavau-->
+            <div th:if="${newComment.blogRecord.id}"></div>
+            <div th:text="${newComment.blogRecord.name}"></div>
+            <div th:text="${newComment.blogRecord.user}"></div>
+            <form th:method="post" th:object="${newComment}"
+                      th:action="@{'/records/private/addComment/' + ${newComment.blogRecord.id}}">
+                <label>Pavadinimas</label>
+                <!--    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
+                <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
+                <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
-<form method="post" th:object="${newComment}" >
-    <label>Pavadinimas</label>
-<!--    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
-    <input type="text" placeholder="testLabel" class="form-control" th:field="${newComment.content}"/>
-    <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
-
-    <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
-</form>
-
+                <button type="submit" class="btn btn-primary">Sukurti komentarą</button>
+            </form>
+        </div>
+    </div>
 </div>
-<!--<form method="post" th:object="${comment}" >-->
-
-<!--&lt;!&ndash;    Čia reikia pasakyti kuriame bloge darai komentarą. &ndash;&gt;-->
-
-<!--    <label>Pavadinimas</label>-->
-<!--    <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
-<!--    <br>-->
-
-<!--    <label>Vartotojo vardas</label>-->
-<!--    <input type="text" placeholder="Vartotojo vardas" name="vardas" th:field="*{username}"/>-->
-<!--    <br>-->
-
-<!--    <label>Turinys</label>-->
-<!--    <br>-->
-<!--    <textarea rows="20" cols="60" name="comment" th:field="*{text}">-->
-<!--    </textarea>-->
-<!--    <br>-->
-
-<!--    <button type="submit">Sukurti komentarą</button>-->
-<!--    <br>-->
-
-<!--</form>-->
-
-
-
 
 </body>
 </html>

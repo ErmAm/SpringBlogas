@@ -145,12 +145,6 @@ public class RecordControler {
         return "redirect:/records/public/all";
     }
 
-
-
-
-
-
-
     /**
      * Komentarų dalis. Nežinau tik dar kaip viską implimentinsiu.
      * <p>
@@ -162,17 +156,13 @@ public class RecordControler {
 //    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
 
 
-//    ar to reikia
-    @GetMapping("private/comment/addComment/{blog_id}")
+    @GetMapping("private/addComment/{blog_id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String createNewCommentView(@PathVariable UUID blog_id, Model model) {
-//        1. Čia tricky dalis reikia susirasti ar blogo irašas egzistuoja
         BlogRecord blogRecord = recordService.getRecord(blog_id);
         if (!blogRecord.equals(null)) {
             Comment newComent = new Comment();
             newComent.setBlogRecord(blogRecord);
-//                1. TODO Reikia su useriu sutvarkyti šią vietą
-//                newComent.setUser();
-
             model.addAttribute("newComment", newComent);
 
             return "comment";
@@ -182,25 +172,29 @@ public class RecordControler {
 
     }
 
-    @PostMapping("private/comment/addComment/{blog_id}")
+    @PostMapping("private/addComment/{blog_id}")
     public String addComment(@Valid Comment comment, Model model) {
         model.addAttribute("newComment", new Comment());
         model.addAttribute("success", "comment was created successfully");
+
+        String blogoID = comment.getBlogRecord().getId().toString();
+
         commentService.addComment(comment);
-        return "redirect:/public/records/all";
+        return "redirect:/records/public/"+ blogoID;
     }
 
+//    Pridedam updeitą
 
-//    2. Gaunam visus komentarus susijusius su šiuo įrašu.
-//    2.1 siunčiam užklausą servisui ten ir turi atvfiltruoti
 
-//    @GetMapping("/comment/viewCommentsOfBlog/{blog_id}")
-//    public String viewBlogComments(@PathVariable UUID blog_id, Model model){
-//
-//
-////        Susitvarkom viev blogpost templeitą
-//
-//    }
+
+    @PostMapping("/private/deleteComment/{id}")
+    public String deleteComment(@PathVariable final UUID id){
+
+        String blogID = commentService.getComment(id).getBlogRecord().getId().toString();
+        commentService.delete(id);
+        return "redirect:/records/public/" + blogID;
+    }
+
 
 
 

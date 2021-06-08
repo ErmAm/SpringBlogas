@@ -65,16 +65,50 @@
                 <a class="btn btn-primary" th:href="@{'/records/private/update/' + ${blogRecordToView.id}}">Update</a>
                 </span>
 
+                    <!--pridedam komentarą per post mygtuka -->
+
                 </div>
             </div>
 
 
             <h3>Comments</h3>
+
+            <div sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')">
+                <form th:action="@{'/records/private/addComment/' + ${blogRecordToView.id}}" th:method="get">
+                    <button type="submit" class="btn btn-primary">
+                        Add Comment
+                    </button>
+                </form>
+
+            </div>
             <!--            associatedComments-->
 
-            <div th:each="comment: ${associatedComments}">
-                <div th:text="${comment.user}">Username</div>
-                <div th:text="${comment.content}">Content</div>
+            <div class="border">
+                <div th:each="comment: ${associatedComments}">
+                    <div class="border">
+                        <div th:text="${comment.user}">Username</div>
+                        <div th:text="${comment.content}">Content</div>
+
+                        <!--                    TODO čia dabar dirbu darau delete update mygtukus -->
+
+
+                        <form th:action="@{'/records/private/updateComment/' + ${comment.id}}"
+                              th:method="get">
+                            <button type="submit" class="btn btn-primary">
+                                Update
+                            </button>
+                        </form>
+
+                        <form th:action="@{'/records/private/deleteComment/' + ${comment.id}}"
+                              th:method="POST">
+                            <button type="submit" class="btn btn-primary">
+                               Delete
+                            </button>
+                        </form>
+
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
