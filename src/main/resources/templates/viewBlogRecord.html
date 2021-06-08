@@ -54,13 +54,17 @@
 
             <div>
 <!--                @{'/records/public/' + ${blogRecord.id}}-->
-<!--                <a th:href="@{'/records/private/delete/' + ${blogRecordToView.id}}">Delete</a>-->
+<!--                -->
 
                 <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
                     <button type="submit" class="btn btn-primary">
                         Delete
                     </button>
                 </form>
+
+                <a class="btn btn-primary" th:href="@{'/records/private/update/' + ${blogRecordToView.id}}">Update</a>
+
+
             </div>
 
 
