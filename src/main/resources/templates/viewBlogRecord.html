@@ -33,19 +33,41 @@
             <div class="p-2" th:object="${blogRecordToView}">
 
                 <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
-                     th:text="#{view.Blog.record.title}">Record name></div>
-                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.name}">Pavadinimas></div>
+                     th:text="#{view.Blog.record.title}">Record name>
+                </div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.name}">
+                    Pavadinimas>
+                </div>
                 <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
-                     th:text="#{view.Blog.record.author}">Record name></div>
-                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.username}">Vartotojo vardas</div>
+                     th:text="#{view.Blog.record.author}">Record name>
+                </div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.username}">
+                    Vartotojo vardas
+                </div>
                 <div class="p-2 m-1 d-flex justify-content-center font-weight-bold"
-                     th:text="#{view.Blog.record.content}">Record name></div>
-                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.text}">Pavadinimas</div>
+                     th:text="#{view.Blog.record.content}">Record name>
+                </div>
+                <div class="p-2 m-2 d-flex justify-content-center border" th:text="${blogRecordToView.text}">
+                    Pavadinimas
+                </div>
+            </div>
+
+            <div>
+<!--                @{'/records/public/' + ${blogRecord.id}}-->
+<!--                <a th:href="@{'/records/private/delete/' + ${blogRecordToView.id}}">Delete</a>-->
+
+                <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
+                    <button type="submit" class="btn btn-primary">
+                        Delete
+                    </button>
+                </form>
             </div>
 
 
+
+
             <h3>Comments</h3>
-<!--            associatedComments-->
+            <!--            associatedComments-->
 
             <div th:each="comment: ${associatedComments}">
                 <div th:text="${comment.user}">Username</div>
@@ -54,34 +76,10 @@
         </div>
     </div>
 
-<!--    pridedam komentaro formą -->
-
-<!--    <form method="post" th:object="${newComment}" >-->
-
-
-<!--        <label>Pavadinimas</label>-->
-<!--        <input type="text" placeholder="Naujo įrašo pavadinimas" th:field="*{name}"/>-->
-<!--        <br>-->
-
-<!--        <label>Vartotojo vardas</label>-->
-<!--        <input type="text" placeholder="Vartotojo vardas" name="vardas" th:field="*{username}"/>-->
-<!--        <br>-->
-
-<!--        <label>Turinys</label>-->
-<!--        <br>-->
-<!--        <textarea rows="20" cols="60" name="comment" th:field="*{text}">-->
-<!--    </textarea>-->
-<!--        <br>-->
-
-<!--        <button type="submit">Sukurti komentarą</button>-->
-<!--        <br>-->
-
-<!--    </form>-->
 
     <div>
 
     </div>
-
 
 
 </div>

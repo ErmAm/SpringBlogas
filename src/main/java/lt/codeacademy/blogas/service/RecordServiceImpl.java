@@ -7,7 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -52,8 +54,15 @@ public class RecordServiceImpl implements RecordService {
     }
 
     @Override
-    public void delete(UUID uuid) {
-        recordRepository.deleteById(uuid);
+    public void delete(UUID id) {
+
+        Optional<BlogRecord> blogForDelete = recordRepository.findById(id);
+        if (blogForDelete.isPresent()){
+            recordRepository.deleteById(id);
+        }else {
+            throw new BlogRecordNotFoundException(id.toString());
+        }
+
     }
 
 //    TODO biški nepagaunu šitos implimentacijos. Iš kur jis repo guana info?

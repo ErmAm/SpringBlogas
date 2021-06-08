@@ -12,11 +12,11 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/public/registration")
-public class userController {
+public class UserController {
 
     private final UserService userService;
 
-    public userController(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 

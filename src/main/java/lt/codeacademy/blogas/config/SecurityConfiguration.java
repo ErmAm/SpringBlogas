@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.sql.DataSource;
 
-@EnableGlobalMethodSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true,jsr250Enabled = true)
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -72,20 +72,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder1);
-
-//                .jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .usersByUsernameQuery("SELECT name as username, password, TRUE as enabled FROM Users u WHERE u.name = ?")
-//                .authoritiesByUsernameQuery("SELECT name as username, 'USER' as authority FROM Users u WHERE u.name = ?")
-//                .passwordEncoder(passwordEncoder);
-//                .inMemoryAuthentication()
-//                .withUser("user")
-//                    .password(passwordEncoder.encode("pass"))
-//                    .roles("USER")
-//                    .and()
-//                .withUser("admin")
-//                    .password(passwordEncoder.encode("admin"))
-//                    .roles("ADMIN");
     }
 
 //    @Bean
@@ -93,22 +79,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 //    }
 
-    //
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//
-////        http
-////                .authorizeRequests()
-////                .anyRequest()
-////                .authenticated();
-////                .and()
-////                .formLogin()
-////                .permitAll();
-////                .loginPage("/prisijungimas")
-////                .loginProcessingUrl("/prisijungimas")
-////                .usernameParameter("loginName")
-////                .passwordParameter("loginPassword")
-////                .defaultSuccessUrl("/products", true)
-////                .failureUrl("/prisijungimas?error");
-//    }
+
 }

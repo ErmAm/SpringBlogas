@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"                                  >
 <head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 
 <!--    TODO nežinau kodėl neveikia bootstrapas is framgento-->
@@ -25,11 +27,8 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
      th:if="${blogRecordListPage.hasContent()}">
 
 
-    <h1>Išparsinam Listą</h1>
-
 <!--  TASK1 Message   Žinutė apie sėkminga blog recordo sukūrimą -->
     <div th:if="${blogRecordCreatedMsg}" th:text="${blogRecordCreatedMsg}"></div>
-
 
 
     <table border="1px">

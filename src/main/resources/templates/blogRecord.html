@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:replace="fragments/reusable :: header(#{existingUser.header.title})">
 </head>
 <body>
@@ -19,46 +21,50 @@
 
 <div class="container">
 
-<div class="col-3">
+    <div class="col-3">
+
+        <form method="post" th:object="${blogRecord}" th:action="@{/records/private/createRecord}">
+
+            <!--TODO  Autoriui reikia pagaloti iš karto pagal kategoriją ar pasiimima is prisijungusio userio
+              ar anonimous
+            -->
+
+            <label>Pavadinimas</label>
+            <input type="text" placeholder="Naujo įrašo pavadinimas"
+                   th:field="*{name}"/>
+
+            <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>
+            <br>
+
+            <!--  Gali reikėti gali ne-reikėti username -->
+            <!--  Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***-->
+
+            <label>Vartotojo vardas</label>
+            <input type="text" placeholder="Vartotojo vardas" name="vardas"
+                   th:field="*{username}"
+                   th:errorclass="fieldError"
+            />
+            <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>
+            <br>
+
+            <label>Turinys</label>
+            <br>
+            <textarea rows="20" cols="60" name="comment"
+                      th:field="*{text}"
+            />
+            <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>
+            <br>
+
+            <!-- Su mygtuku biški susižaistir eikia.-->
+            <button class="btn btn-primary" type="submit">Sukurti įrašą</button>
+
+        </form>
+    </div>
+
+<!--    reikia prisidėti del mygtuką-->
 
 
-<form method="post" th:object="${blogRecord}" >
 
-    <!--TODO  Autoriui reikia pagaloti iš karto pagal kategoriją ar pasiimima is prisijungusio userio
-      ar anonimous
-    -->
-
-    <label>Pavadinimas</label>
-    <input type="text" placeholder="Naujo įrašo pavadinimas"
-           th:field="*{name}"/>
-
-    <p th:class="${#fields.hasErrors('name')}" th:errors="*{name}">Blogname errors</p>
-    <br>
-
-    <!--  Gali reikėti gali ne-reikėti username -->
-    <!--  Jei nori kad išeitų info reikia pridėti pvz *** name="vardas" ***-->
-
-    <label>Vartotojo vardas</label>
-    <input type="text" placeholder="Vartotojo vardas" name="vardas"
-           th:field="*{username}"
-           th:errorclass="fieldError"
-    />
-    <p th:class="${#fields.hasErrors('username')}" th:errors="*{username}">Username errors</p>
-    <br>
-
-    <label>Turinys</label>
-    <br>
-    <textarea rows="20" cols="60" name="comment"
-              th:field="*{text}"
-    />
-    <p th:class="${#fields.hasErrors('text')}" th:errors="*{text}">Text errors</p>
-    <br>
-
-    <!-- Su mygtuku biški susižaistir eikia.-->
-    <button class="btn btn-primary" type="submit">Sukurti įrašą</button>
-
-</form>
-</div>
 </div>
 
 </body>

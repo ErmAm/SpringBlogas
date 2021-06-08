@@ -9,12 +9,14 @@ import lt.codeacademy.blogas.service.RecordService;
 
 import lt.codeacademy.blogas.service.UserService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -39,6 +41,7 @@ public class RecordControler {
 
     //    sukuriam vartotojoą
     @GetMapping("/private/createRecord")
+    @PreAuthorize("hasRole('ADMIN')")
     public String getSigngleBlogCreationPage(Model model) {
         model.addAttribute("blogRecord", new BlogRecord());
 
@@ -48,6 +51,7 @@ public class RecordControler {
 //    TODO gali nereikėti modelio atributo.
 
     @PostMapping("/private/createRecord")
+    @PreAuthorize("hasRole('ADMIN')")
     public String createProduct(@Valid BlogRecord blogRecord, BindingResult errors, Model model) {
 
         if (errors.hasErrors()){
@@ -56,7 +60,7 @@ public class RecordControler {
         recordService.addRecord(blogRecord);
 
 
-        return "redirect:/records/all/?message=blogRecord.created.success.message";
+        return "redirect:/records/public/all/?message=blogRecord.created.success.message";
     }
 
 //    *** 04-30
@@ -100,6 +104,7 @@ public class RecordControler {
 
     //    05-03 gauname vieną blogo įrašą
     @GetMapping("public/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String getBlogRecord(@PathVariable final UUID id, Model model) {
 
 //      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
@@ -115,6 +120,26 @@ public class RecordControler {
             return "404";
         }
     }
+
+    /**
+     *
+     * Pridedu delete mygtuką
+     *
+     * 1. Sutvarkytas daugiau minčių nėra
+     *
+     *
+     * */
+
+    @PostMapping("private/delete/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    public String deleteBlogRecord(@PathVariable final UUID id) {
+        recordService.delete(id);
+        return "redirect:/records/public/all";
+    }
+
+
+
+
 
 
     /**

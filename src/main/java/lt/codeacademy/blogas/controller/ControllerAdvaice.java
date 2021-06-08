@@ -21,6 +21,6 @@ public class ControllerAdvaice {
     @ExceptionHandler(BlogRecordNotFoundException.class)
     public String blogRecordNotFound(BlogRecordNotFoundException e, Model model){
         model.addAttribute("blogID",e.getMessage());
-        return "productNotFound";
+        return "redirect:/records/public/all";
     }
 }
