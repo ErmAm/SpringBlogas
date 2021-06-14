@@ -19,33 +19,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 
 <body>
 <nav th:replace="fragments/reusable :: navigationBar"></nav>
 
-<div class="container">
+<div class="container p-5">
     <div class="row">
         <div class="col border">
 
 
 <!--            ***************** TEST *******              -->
-<!--            <div sec:authorize="!hasRole('ADMIN')">-->
-<!--                <a class="btn btn-outline-secondary"-->
-<!--                   role="button"-->
-<!--                   href="#"-->
-<!--                  > Mygtukas</a>-->
-<!--            </div>-->
-
-<!--            <div sec:authorize="!hasRole('ROLE_ADMIN')">-->
-<!--                <a class="btn btn-outline-secondary"-->
-<!--                   role="button"-->
-<!--                   href="#"-->
-<!--                > Mygtukas2</a>-->
-<!--            </div>-->
-
-
-
 
 <!-- *******************************************         -->
             <!--  piešiu su bootstrapu-->
@@ -72,45 +58,36 @@
             </div>
 
             <div sec:authorize="isAuthenticated()">
-                <div sec:authorize="hasRole('USER') or hasRole('ADMIN')">
+
+                <div sec:authorize="hasRole('USER') or hasRole('ADMIN')" class="d-inline">
                 <span>
                     <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            th:text="#{view.Blog.record.delete.button}">
                         Delete
                     </button>
                 </form>
 
-                <a class="btn btn-primary" th:href="@{'/records/private/update/' + ${blogRecordToView.id}}">Update</a>
+                <a class="btn btn-primary"
+                   th:href="@{'/records/private/update/' + ${blogRecordToView.id}}"
+                   th:text="#{view.Blog.record.update.button}">Update</a>
                 </span>
 
-                    <!--pridedam komentarą per post mygtuka -->
+
 
                 </div>
             </div>
 
 
-            <h1>Debug</h1>
 
-            <div>
-<!--                <div th:text="${#authentication.principal.}">-->
-<!--                <div sec:authentication="${#authentification.principal.}"></div>-->
-<!--                <div th:text="${principalas.name}">-->
-<!--                </div>-->
-
-<!--                <span sec:authentication="principal.authorities"></span>-->
-
-<!--                <div th:text="${userDetail.getRoles()}">-->
-
-<!--                </div>-->
-            </div>
-
-
-
-            <h3 class="mt-5">Comments</h3>
+            <h3 class="mt-5" th:text="#{view.Blog.record.comment}">Comments</h3>
 
             <div sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')">
                 <form th:action="@{'/records/private/addComment/' + ${blogRecordToView.id}}" th:method="get">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit"
+                            class="btn btn-primary"
+                            th:text="#{view.Blog.record.add.comment.button}">
                         Add Comment
                     </button>
                 </form>
@@ -128,14 +105,18 @@
 
                         <form th:action="@{'/records/private/updateComment/' + ${comment.id}}"
                               th:method="GET">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit"
+                                    class="btn btn-primary"
+                                    th:text="#{view.Blog.comment.update.button}">
                                 Update
                             </button>
                         </form>
 
                         <form th:action="@{'/records/private/deleteComment/' + ${comment.id}}"
                               th:method="POST">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit"
+                                    class="btn btn-primary"
+                                    th:text="#{view.Blog.comment.delete.button}">
                                Delete
                             </button>
                         </form>
@@ -155,5 +136,7 @@
 
 </div>
 
+<script th:src="@{/js/language.js}" type="text/javascript"></script>
 </body>
+
 </html>

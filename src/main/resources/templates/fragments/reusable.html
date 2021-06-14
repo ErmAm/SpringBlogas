@@ -23,6 +23,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 
 <!--Pridedam kalbos fragmenta-->
@@ -50,10 +51,11 @@
                                     th:text="#{navbar.registration}"
                                     sec:authorize="!isAuthenticated()">Registration</a></li>
 
-            <li class="nav-item"><a class="nav-link" href="/records/private/addComment" sec:authorize="isAuthenticated()">
-                Add Comment</a></li>
+<!--            <li class="nav-item"><a class="nav-link" href="/records/private/addComment"-->
+<!--                                    sec:authorize="isAuthenticated()">-->
+<!--                Add Comment</a></li>-->
 
-            <li>
+<!--            <li>-->
                 <div>
                 <span class="m-3" sec:authorize="isAuthenticated()">
                     <span sec:authentication="principal.name"> </span>
@@ -83,8 +85,6 @@
 
     </div>
 </nav>
-
-
 
 
 
