@@ -6,12 +6,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
 
-/**
- * 1. Šito serviso reikia kad perduotume stringus thymeafui.
- *    Susiradau žinutės šaltinį ir gaudau, apgal lokalę.
- *
- * */
-
 @Service
 public class MessageService {
 

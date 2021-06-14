@@ -2,9 +2,7 @@ package lt.codeacademy.blogas.config;
 
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true,jsr250Enabled = true)
 @Configuration
@@ -26,7 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-    //    Praleidžiam visą srautą
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.
@@ -62,10 +58,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(
                 PathRequest.toStaticResources().atCommonLocations());
     }
-
-    /**
-     * Šitas reikalingas authoizacijai
-     */
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {

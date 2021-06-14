@@ -20,7 +20,6 @@ import java.util.UUID;
 public class Role implements GrantedAuthority {
 
     @Id
-//    @GeneratedValue
     @Column(columnDefinition = "VARCHAR(36)", updatable = false)
     @Type(type = "uuid-char")
     private UUID id;

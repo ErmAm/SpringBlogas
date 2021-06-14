@@ -11,10 +11,6 @@ import java.util.UUID;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-//    Reikia naudoti query ir negaloti
-
-
-
     @Query("SELECT u FROM User u WHERE u.username= :userName")
     User findUserByName(@Param("userName") String userName);
 

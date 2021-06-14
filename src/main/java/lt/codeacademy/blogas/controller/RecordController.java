@@ -3,17 +3,12 @@ package lt.codeacademy.blogas.controller;
 import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.Comment;
 import lt.codeacademy.blogas.model.User;
-import lt.codeacademy.blogas.model.exception.BlogRecordNotFoundException;
 import lt.codeacademy.blogas.service.CommentService;
 import lt.codeacademy.blogas.service.MessageService;
 import lt.codeacademy.blogas.service.RecordService;
-
 import lt.codeacademy.blogas.service.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Optional;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/records")
-public class RecordControler {
+public class RecordController {
 
     private final RecordService recordService;
     private final CommentService commentService;
@@ -34,10 +28,10 @@ public class RecordControler {
 
     private final MessageService messageService;
 
-    public RecordControler(RecordService newRecordService,
-                           CommentService commentService,
-                           UserService userService,
-                           MessageService messageService) {
+    public RecordController(RecordService newRecordService,
+                            CommentService commentService,
+                            UserService userService,
+                            MessageService messageService) {
         this.recordService = newRecordService;
         this.commentService = commentService;
         this.userService = userService;
@@ -65,8 +59,6 @@ public class RecordControler {
         return "redirect:/records/public/all/?message=blogRecord.created.success.message";
     }
 
-
-    //    ieškom produkto pagal pavadinimą.
     @GetMapping("public/findRecordByName")
     public String getRecordByName(@RequestParam String name, Model model) {
         model.addAttribute("blogRecord", recordService.getByUsername(name));
@@ -77,11 +69,6 @@ public class RecordControler {
     @GetMapping("public/all")
     public String getRecords(Pageable pageable, Model model, String message) {
 
-
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentPrincipalName = authentication.getName();
-//        System.out.println("***********************" + currentPrincipalName);
-
         model.addAttribute("blogRecordListPage", recordService.getBlogRecordsPaginated(pageable));
 
         if (message != null) {
@@ -91,17 +78,10 @@ public class RecordControler {
         return "blogMainPage";
     }
 
-    //    05-03 gauname vieną blogo įrašą
     @GetMapping("public/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
     public String getBlogRecord(@PathVariable final UUID id, Model model
      ) {
 
-//      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
-//        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
-//        SecurityContextHolder.getContext().getAuthentication();
-//        model.addAttribute("principalas", principal);
-//        model.addAttribute("userDetail", user);
         BlogRecord blogRecord = recordService.getRecord(id);
         if (!blogRecord.equals(null)) {
 
@@ -114,12 +94,6 @@ public class RecordControler {
         }
     }
 
-    /**
-     * Pridedu delete mygtuką
-     * <p>
-     * 1. Sutvarkytas daugiau minčių nėra
-     */
-
 
     @PostMapping("private/delete/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -127,10 +101,6 @@ public class RecordControler {
         recordService.delete(id);
         return "redirect:/records/public/all";
     }
-
-    /**
-     * Updeitas
-     */
 
     @GetMapping("/private/update/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -149,14 +119,6 @@ public class RecordControler {
         recordService.update(blogRecord);
         return "redirect:/records/public/all";
     }
-
-    /**
-     * Komentarų dalis. Nežinau tik dar kaip viską implimentinsiu.
-     * <p>
-     * 1. Prasitestavau blogo pridėjima ir atėmimą viskas veikia
-     * <p>
-     * 2. Reikia sukurti atskira kontrolerį komentarų vievinimui.
-     */
 
     @GetMapping("private/addComment/{blog_id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -187,13 +149,6 @@ public class RecordControler {
     public String updateComment(@PathVariable UUID id, Model model,Principal principal) {
 
         Comment commentToUpdate = commentService.getComment(id);
-
-//        1.1 patikrinu komentaro autorių. Išmetė null vadinasi tusčias. Reikia perdaryti į optional.
-//        if(commentToUpdate.getUser().getId().equals(principal.getName())){
-//            System.out.println("Sutapo pavadinimas");
-//            System.out.println("*******************" + commentToUpdate.getUser().toString());
-//        }
-
         model.addAttribute("newComment", commentToUpdate);
         return "comment";
     }

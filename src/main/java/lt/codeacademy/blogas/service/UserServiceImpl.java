@@ -1,6 +1,5 @@
 package lt.codeacademy.blogas.service;
 
-import lt.codeacademy.blogas.model.BlogRecord;
 import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

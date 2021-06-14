@@ -25,9 +25,4 @@ public interface UserService {
 
     UserDetails loadUserByUsername(String username);
 
-//    //    Atsirado poreikis rasti blogą pagal pvz useri
-//    BlogRecord getByUsername(String name);
-
-//    Page<BlogRecord> getBlogRecordsPaginated(Pageable pageable);
-
 }

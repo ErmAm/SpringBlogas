@@ -21,15 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    // 0. Atidarome create user formą
-
     @GetMapping("/createUser")
     public String createNewUser(Model model){
         model.addAttribute("newUser", new User());
         return "registration";
     }
 
-    // 1. susikuriam naują userį.
     @PostMapping("/createUser")
     public String createNewUser(@Valid User user, BindingResult errors){
         if (errors.hasErrors()) {
@@ -39,15 +36,12 @@ public class UserController {
         return "redirect:/records/public/all/?message=user.created.success.message";
     }
 
-    // 2. randame susikurtą userį pagal vardą
     @GetMapping("/findByName")
     public String findUserByName(@RequestParam String username, Model model){
         model.addAttribute("userToWorkWith", userService.getUserByName(username));
         return "existingUser";
     }
 
-
-    // 3. leidžiame updeitinti userį.
     @GetMapping("/update")
     public String findUserByIdToUpdate(@RequestParam UUID id, Model model){
         User userToUpdate = userService.getUserById(id);
@@ -55,8 +49,6 @@ public class UserController {
         return "existingUser";
     }
 
-
-    // 4.deletiname userį.
     @GetMapping("/delete")
     public String deketeUser(@RequestParam UUID id){
         userService.delete(id);

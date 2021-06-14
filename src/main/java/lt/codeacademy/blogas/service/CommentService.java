@@ -18,7 +18,6 @@ public interface CommentService {
     void delete(UUID id);
 
 
-    //    mano prigalvoti metodai
     List<Comment> filteredByBlogComments(UUID id);
 
 
