@@ -2,7 +2,7 @@
 Namų darbas
 
 Thechnology
-Java CE 11
+Java SE 11
 
 Buildtools
 Inteliji Ultimate 2021
