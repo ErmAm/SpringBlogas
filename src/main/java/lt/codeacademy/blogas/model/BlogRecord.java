@@ -46,7 +46,7 @@ public class BlogRecord {
     private String username;
 
     @NotBlank
-//    @Min(10)
+    @Column(length = 6000)
     private String text;
 
 

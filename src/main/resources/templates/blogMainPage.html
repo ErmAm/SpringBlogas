@@ -67,11 +67,6 @@ Iš esmės parsiname thymleafe gautą per referencą objektą.
                 th:each="pageNumber : ${#numbers.sequence(0, blogRecordListPage.totalPages - 1)}"
                 th:classappend="${pageNumber eq blogRecordListPage.number ? 'active' : ''}">
                 <a class="page-link" th:href="@{/records/public/all(page=${pageNumber})}" th:text="${pageNumber} + 1">1</a>
-<!--                <a class="page-link"-->
-<!--                   th:with="order=${blogRecordList.sort.iterator().hasNext() ? blogRecordList.sort.iterator().next() : null}"-->
-<!--                   th:href="@{/records(page=${pageNumber}, sort=${order.property + ',' + order.direction})}"-->
-<!--                   th:text="${pageNumber} + 1">1</a>-->
-
             </li>
 
             <li class="page-item"

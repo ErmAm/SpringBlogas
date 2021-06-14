@@ -44,7 +44,7 @@ public class RecordControler {
         this.messageService = messageService;
     }
 
-    //    sukuriam vartotojoą
+    //    sukuriam  puslapį
     @GetMapping("/private/createRecord")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getSigngleBlogCreationPage(Model model, User user) {
@@ -90,14 +90,14 @@ public class RecordControler {
     //    05-03 gauname vieną blogo įrašą
     @GetMapping("public/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public String getBlogRecord(@PathVariable final UUID id, Model model, @AuthenticationPrincipal User user,
-     Principal principal, Authentication authentication) {
+    public String getBlogRecord(@PathVariable final UUID id, Model model
+     ) {
 
 //      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
 //        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
 //        SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("principalas", principal);
-        model.addAttribute("userDetail", user);
+//        model.addAttribute("principalas", principal);
+//        model.addAttribute("userDetail", user);
         BlogRecord blogRecord = recordService.getRecord(id);
         if (!blogRecord.equals(null)) {
 

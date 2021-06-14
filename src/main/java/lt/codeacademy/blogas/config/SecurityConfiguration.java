@@ -31,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http.
                 authorizeRequests()
-                .antMatchers("/public/registration/**","/login", "/records/public/**", "/")
+                .antMatchers("/public/registration/**","/login","/logout", "/records/public/**", "/")
                 .permitAll()
                 .antMatchers("/records/private/**")
                 .authenticated()
@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=true")
                 .and()
                 .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/records/public/all")
                 .permitAll()
         ;
 
@@ -62,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Šitas reikalingas authorizacijai
+     * Šitas reikalingas authoizacijai
      */
 
     @Override
@@ -73,11 +75,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder1);
     }
-
-//    @Bean
-//    public PasswordEncoder encoder1() {
-//        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//    }
-
 
 }

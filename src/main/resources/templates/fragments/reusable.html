@@ -36,41 +36,28 @@
 
 </div>
 
-
-<!--Truputi pataisytas-->
-
 <nav th:fragment="navigationBar">
     <div>
-        <ul class="nav navbar-light bg-light justify-content-between">
+        <ul class="nav navbar-light bg-light">
             <li class="nav-item"><a class="nav-link" href="/" th:text="#{navbar.home.link}">Home</a></li>
 
             <li sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')"
                 class="nav-item"><a class="nav-link" href="/records/private/createRecord"
                                     th:text="#{navbar.create.new.record}">Create New Record</a></li>
 
-            <li>
+            <li class="nav-item"><a class="nav-link"
+                                    th:href="@{/public/registration/createUser}"
+                                    th:text="#{navbar.registration}"
+                                    sec:authorize="!isAuthenticated()">Registration</a></li>
 
-            </li>
-            <li sec:authorize="!isAuthenticated()"
-                    class="nav-item"><a class="nav-link" href="/public/registration/createUser"
-                                    th:text="#{navbar.registration}">Registration</a></li>
-            <li class="nav-item"
-                th:insert="fragments/reusable :: languageSelection">
-                <div class="mt-4">
-                    Select Language
-                </div>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="/records/private/addComment" sec:authorize="isAuthenticated()">
+                Add Comment</a></li>
 
             <li>
                 <div>
-                    <div>
-                 <span class="m-3" sec:authorize="isAuthenticated()"
-                          sec:authentication="principal.getUsername()">
+                <span class="m-3" sec:authorize="isAuthenticated()">
+                    <span sec:authentication="principal.name"> </span>
                 </span>
-<!--                        <div sec:authentication="prop">-->
-
-<!--                        </div>-->
-                    </div>
                     <span sec:authorize="!isAuthenticated()">
                 <a class="nav-link"
                    th:href="@{/login}"
@@ -79,40 +66,149 @@
                     </span>
                 </div>
             </li>
-        </ul>
 
+            <li sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="btn" th:text="#{navbar.logut.text}"/>
+                </form>
+            </li>
+
+            <li class="nav-item"
+                th:insert="fragments/reusable :: languageSelection">
+                <div class="mt-4">
+                    Select Language
+                </div>
+            </li>
+        </ul>
 
     </div>
 </nav>
 
 
-<!--Kitas navbar elementas
--->
 
-<nav  class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigationBarV2">
-    <button class="navbar-toggler" type="button" data-toggle="collapse"  aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"><a class="nav-link" href="/" th:text="#{navbar.home.link}">Home</a></span>
-    </button>
-    <a class="navbar-brand" href="#">Navbar</a>
 
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+
+<!--Truputi pataisytas-->
+
+<!--<nav th:fragment="navigationBar">-->
+<!--    <div>-->
+<!--        <ul class="nav navbar-light bg-light justify-content-between">-->
+<!--            <li class="nav-item"><a class="nav-link" href="/" th:text="#{navbar.home.link}">Home</a></li>-->
+
+<!--            <li sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')"-->
+<!--                class="nav-item"><a class="nav-link" href="/records/private/createRecord"-->
+<!--                                    th:text="#{navbar.create.new.record}">Create New Record</a></li>-->
+
+<!--            <li>-->
+
+<!--            </li>-->
+<!--            <li sec:authorize="!isAuthenticated()"-->
+<!--                class="nav-item"><a class="nav-link" href="/public/registration/createUser"-->
+<!--                                    th:text="#{navbar.registration}">Registration</a>-->
+<!--            </li>-->
+
+<!--            <li class="nav-item"-->
+<!--                th:insert="fragments/reusable :: languageSelection">-->
+<!--                <div class="mt-4">-->
+<!--                    Select Language-->
+<!--                </div>-->
+<!--            </li>-->
+
+
+<!--            <div>-->
+
+
+<!--            <li class="nav-item">-->
+<!--             <span class="m-3" sec:authorize="isAuthenticated()"-->
+<!--                   sec:authentication="principal.getUsername()">-->
+<!--                </span>-->
+<!--            <li>-->
+
+<!--            <li class="nav-item">-->
+<!--             <span sec:authorize="!isAuthenticated()">-->
+<!--                        <a class="nav-link"-->
+<!--                           th:href="@{/login}"-->
+<!--                           th:text="#{navbar.login.text}"-->
+<!--                        ></a>-->
+<!--                    </span>-->
+<!--            </li>-->
+
+<!--            </div>-->
+
+<!--&lt;!&ndash;                <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                 <span class="m-3" sec:authorize="isAuthenticated()"&ndash;&gt;-->
+<!--&lt;!&ndash;                       sec:authentication="principal.getUsername()">&ndash;&gt;-->
+<!--&lt;!&ndash;                </span>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span sec:authorize="!isAuthenticated()">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <a class="nav-link"&ndash;&gt;-->
+<!--&lt;!&ndash;                                            th:href="@{/login}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                            th:text="#{navbar.login.text}"&ndash;&gt;-->
+<!--&lt;!&ndash;                ></a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--        </ul>-->
+
+
+<!--    </div>-->
+<!--</nav>-->
+
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigationBarV2">-->
+<!--    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"-->
+<!--            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--        <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <a class="navbar-brand" href="/" #{navbar.home.link}>Blogas</a>-->
+
+<!--    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">-->
+<!--        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">-->
+<!--            <li class="nav-item active">-->
+<!--                <a class="nav-link" href="/" th:text="#{navbar.home.link}">Home</a>-->
+<!--            </li>-->
+
+<!--            <li sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')"-->
+<!--                class="nav-item"><a class="nav-link" href="/records/private/createRecord"-->
+<!--                                    th:text="#{navbar.create.new.record}">Create New Record</a>-->
+<!--            </li>-->
+
+<!--            <li>-->
+
+<!--            <li sec:authorize="!isAuthenticated()"-->
+<!--                class="nav-item"><a class="nav-link" href="/public/registration/createUser"-->
+<!--                                    th:text="#{navbar.registration}">Registration</a>-->
+<!--            </li>-->
+
+<!--        </ul>-->
+<!--        <div>-->
+<!--            <div>-->
+<!--                 <span class="m-3" sec:authorize="isAuthenticated()"-->
+<!--                       sec:authentication="principal.getUsername()">-->
+<!--                </span>-->
+<!--            </div>-->
+<!--            <span sec:authorize="!isAuthenticated()">-->
+<!--                <a class="nav-link"-->
+<!--                   th:href="@{/login}"-->
+<!--                   th:text="#{navbar.login.text}"-->
+<!--                ></a>-->
+<!--                    </span>-->
+<!--        </div>-->
+
+<!--        <div th:insert="fragments/reusable :: languageSelection">-->
+<!--            <div class="mt-4">-->
+<!--                Select Language-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;        <form class="form-inline my-2 my-lg-0">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </form>&ndash;&gt;-->
+<!--    </div>-->
+<!--</nav>-->
 
 
 </html>
