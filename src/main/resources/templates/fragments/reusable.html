@@ -51,11 +51,6 @@
                                     th:text="#{navbar.registration}"
                                     sec:authorize="!isAuthenticated()">Registration</a></li>
 
-<!--            <li class="nav-item"><a class="nav-link" href="/records/private/addComment"-->
-<!--                                    sec:authorize="isAuthenticated()">-->
-<!--                Add Comment</a></li>-->
-
-<!--            <li>-->
                 <div>
                 <span class="m-3" sec:authorize="isAuthenticated()">
                     <span sec:authentication="principal.name"> </span>
@@ -71,7 +66,8 @@
 
             <li sec:authorize="isAuthenticated()">
                 <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="btn" th:text="#{navbar.logut.text}"/>
+                    <button type="submit" class="btn"
+                            th:text="#{navbar.logut.text}"/>
                 </form>
             </li>
 

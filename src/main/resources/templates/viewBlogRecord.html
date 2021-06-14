@@ -59,7 +59,7 @@
 
             <div sec:authorize="isAuthenticated()">
 
-                <div sec:authorize="hasRole('USER') or hasRole('ADMIN')" class="d-inline">
+                <div sec:authorize="hasRole('ADMIN')">
                 <span>
                     <form th:action="@{'/records/private/delete/' + ${blogRecordToView.id}}" th:method="POST">
                     <button type="submit"

@@ -50,12 +50,6 @@ public class User implements UserDetails {
     @ManyToMany
     private Set<Role> roles;
 
-    // 05-07 TODO šitas  kels bėdų ir vėliau. Time objektas nešneka su hiberneitu
-//    @NotBlank
-//    private Timestamp dateCreated;
-
-
-//    TODO sąryšiai kiek suprantu vienas vartotojas gali turėti daug įrašų ir gali atlikti komentarus
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL)
@@ -95,15 +89,6 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-//    Taip pat useris kuria komentarus
-
-
-//    private BlogRecord blogRecord;
-
-    public String getFullName() {
-        return name + " " + surname;
     }
 
 

@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().requestMatchers(
-                PathRequest.toStaticResources().atCommonLocations()); // statiniai failai (css, images, js)
+                PathRequest.toStaticResources().atCommonLocations());
     }
 
     /**

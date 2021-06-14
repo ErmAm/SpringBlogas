@@ -21,6 +21,4 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :name")
     Optional<User> findByNameWithRoles(@Param("name") String name);
 
-
-//  05-07  Panašu kad paprasčiau bus pasinaudoti paprastais queriais, nei ieškoti kas padaryta su JPARepo.
 }

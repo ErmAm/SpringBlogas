@@ -76,10 +76,14 @@ public class RecordControler {
 
     @GetMapping("public/all")
     public String getRecords(Pageable pageable, Model model, String message) {
-//        List<BlogRecord> blogContent = recordService.getRecords();
+
+
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentPrincipalName = authentication.getName();
+//        System.out.println("***********************" + currentPrincipalName);
+
         model.addAttribute("blogRecordListPage", recordService.getBlogRecordsPaginated(pageable));
 
-//      Čia reikėjo sudėti žinutes apie sėkmingą operaciją.
         if (message != null) {
             model.addAttribute("blogRecordCreatedMsg", messageService.getMessage(message));
         }
@@ -154,7 +158,6 @@ public class RecordControler {
      * 2. Reikia sukurti atskira kontrolerį komentarų vievinimui.
      */
 
-//    reikia pasiūsti thymeleafui id kuriam įrašui darysime komentrarą.
     @GetMapping("private/addComment/{blog_id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     public String createNewCommentView(@PathVariable UUID blog_id, Model model) {
@@ -181,8 +184,16 @@ public class RecordControler {
 
     @GetMapping("private/updateComment/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    public String updateComment(@PathVariable UUID id, Model model) {
+    public String updateComment(@PathVariable UUID id, Model model,Principal principal) {
+
         Comment commentToUpdate = commentService.getComment(id);
+
+//        1.1 patikrinu komentaro autorių. Išmetė null vadinasi tusčias. Reikia perdaryti į optional.
+//        if(commentToUpdate.getUser().getId().equals(principal.getName())){
+//            System.out.println("Sutapo pavadinimas");
+//            System.out.println("*******************" + commentToUpdate.getUser().toString());
+//        }
+
         model.addAttribute("newComment", commentToUpdate);
         return "comment";
     }

@@ -29,6 +29,11 @@
 
                     <textarea rows="10" cols="60" class="form-control"
                               th:field="${newComment.content}"/>
+
+<!--                    TODO  nespėjau prikabinti komentaro savininko     -->
+<!--                    <input type="hidden" th:value="*{newCommenet.user}" th:attr="name='usernamelocgu'"/>-->
+
+
                     <input type="hidden" th:field="*{blogRecord}" id="blogId"/>
 
                     <button type="submit"
