@@ -70,6 +70,30 @@
             </div>
 
 
+            <h1>Debug</h1>
+<!--            <div>-->
+<!--                <! - whether the landing ->-->
+<!--                <div sec:authorize="isAuthenticated()" th:text="${}">-->
+<!--                    <! - User Name ->-->
+<!--                    <span sec:authentication="name"></span>-->
+<!--                    <! - user permissions ->-->
+<!--                    <span sec:authentication="principal.authorities"></span>-->
+<!--            </div>-->
+            <div>
+<!--                <div th:text="${#authentication.principal.}">-->
+<!--                <div sec:authentication="${#authentification.principal.}"></div>-->
+                <div th:text="${principalas.name}">
+                </div>
+
+<!--                <span sec:authentication="principal.authorities"></span>-->
+
+                <div th:text="${userDetail.getRoles()}">
+
+                </div>
+            </div>
+
+
+
             <h3 class="mt-5">Comments</h3>
 
             <div sec:authorize="isAuthenticated() and hasRole('USER') or hasRole('ADMIN')">

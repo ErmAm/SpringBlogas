@@ -1,9 +1,9 @@
 INSERT INTO Blogrecord(id, name, username, text)
 VALUES ('7a580a64-a414-31dc-8d61-52aad9ff2225', 'Kai niežti rankos', 'Solomon',
         'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-       ('7a580a64-a414-31dc-8d61-52aad9ff22ff', 'Irasas 2', 'Solomon',
+       ('7a580a64-a414-31dc-8d61-52aad9ff22ff', 'Irasas 2', 'admin',
         'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
-       ('7a580a64-a414-31dc-8d61-52aad9ff22f1', 'Irasas 3', 'Solomon',
+       ('7a580a64-a414-31dc-8d61-52aad9ff22f1', 'Irasas 3', 'user',
         'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
        ('7a580a64-a414-31dc-8d61-52aad9ff22f2', 'Irasas 4', 'Solomon',
         'Kodėl manęs taip ramanauskas nemyl? Net visa gyrelė tyl'),
@@ -56,7 +56,8 @@ VALUES
        ('00000000-0000-000a-000f-000000000003', 'open', '{bcrypt}$2y$12$abFVrEDcE70NgZokR3VAd.11X2RIm7zVOPJVSyPgYzAIav.H/0rNm','sas','nesakydsiu@zebra.lt','open');
 
 INSERT INTO user_roles(user_id, roles_id)
-VALUES('00000000-0000-000a-000f-000000000001', '00000000-0000-0000-000f-00000000000a'), /* user -> USER ROLE */
+VALUES  ('00000000-0000-000a-000f-000000000001', '00000000-0000-0000-000f-00000000000a'),
+        ('00000000-0000-000a-000f-000000000001', '00000000-0000-0000-000f-000000000001'),
         ('00000000-0000-000a-000f-000000000002', '00000000-0000-0000-000f-000000000001'),
         ('00000000-0000-000a-000f-000000000003', '00000000-0000-0000-000f-000000000001')
         ;

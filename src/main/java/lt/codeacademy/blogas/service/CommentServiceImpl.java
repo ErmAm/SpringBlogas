@@ -16,13 +16,16 @@ public class CommentServiceImpl implements CommentService{
 
 
     private CommentRepository commentRepository;
+    private UserService userService;
 
-    public CommentServiceImpl(CommentRepository commentRepository) {
+    public CommentServiceImpl(CommentRepository commentRepository, UserService userService) {
         this.commentRepository = commentRepository;
+        this.userService = userService;
     }
 
     @Override
     public void addComment(Comment comment) {
+
         commentRepository.save(comment);
     }
 

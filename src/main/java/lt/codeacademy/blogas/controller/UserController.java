@@ -5,6 +5,7 @@ import lt.codeacademy.blogas.model.User;
 import lt.codeacademy.blogas.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,11 +32,13 @@ public class UserController {
 
     // 1. susikuriam naują userį.
     @PostMapping("/createUser")
-    public String createNewUser(@Valid User user, Model model){
-        model.addAttribute("user", new User());
+    public String createNewUser(@Valid User user, Model model, BindingResult errors){
+//        model.addAttribute("user", new User());
+        if (errors.hasErrors()) {
+            return "registration";
+        }
         userService.addUser(user);
-
-        return "redirect:/registration/createUser";
+        return "redirect:/records/public/all/?message=user.created.success.message";
     }
 
 

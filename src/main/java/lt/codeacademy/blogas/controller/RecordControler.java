@@ -11,12 +11,16 @@ import lt.codeacademy.blogas.service.RecordService;
 import lt.codeacademy.blogas.service.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -86,11 +90,14 @@ public class RecordControler {
     //    05-03 gauname vieną blogo įrašą
     @GetMapping("public/{id}")
 //    @PreAuthorize("hasRole('ADMIN')")
-    public String getBlogRecord(@PathVariable final UUID id, Model model) {
+    public String getBlogRecord(@PathVariable final UUID id, Model model, @AuthenticationPrincipal User user,
+     Principal principal, Authentication authentication) {
 
 //      1.  Kai atidarau blogo įrašą reikia parisiusti prie jo esančius komentarus.
 //        Todėl reikia traukti komentarų listą iš komentarų serviso, t.y reikia traukti komentarų lentą iš db.
-
+//        SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("principalas", principal);
+        model.addAttribute("userDetail", user);
         BlogRecord blogRecord = recordService.getRecord(id);
         if (!blogRecord.equals(null)) {
 
